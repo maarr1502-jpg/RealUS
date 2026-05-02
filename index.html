@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mar & Franco - Amor a Distancia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* === RESET Y BASE === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #07071a;
+            color: #f5f0e8;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* === CANVAS FONDO === */
+        #background-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* === NAVEGACIÓN === */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(7, 7, 26, 0.88);
+            backdrop-filter: blur(16px);
+            padding: 1rem 2rem;
+            border-bottom: 0.5px solid rgba(201, 169, 110, 0.18);
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 21px;
+            color: #c9a96e;
+            font-weight: 400;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav .nav-links a {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #f5f0e8;
+            text-decoration: none;
+            transition: color 300ms;
+        }
+
+        nav .nav-links a:hover {
+            color: #c9a96e;
+        }
+
+        /* === CONTENEDOR PRINCIPAL === */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+
+        /* === SECCIONES === */
+        section {
+            background-color: #141428;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 300ms;
+        }
+
+        section:hover {
+            border-color: rgba(201, 169, 110, 0.3);
+        }
+
+        section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: #c9a96e;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Separadores */
+        section + section::before {
+            content: '';
+            display: block;
+            height: 0.5px;
+            background-color: rgba(201, 169, 110, 0.18);
+            margin: 2rem 0;
+        }
+
+        /* === CIÉLOS === */
+        .skies {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .sky-card {
+            background-color: #1c1c35;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 16px;
+            padding: 1rem;
+            position: relative;
+        }
+
+        .sky-canvas {
+            width: 100%;
+            height: 250px;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .sky-info {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .sky-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 23px;
+            color: #f5f0e8;
+            margin-bottom: 0.5rem;
+        }
+
+        .sky-time {
+            font-size: 18px;
+            color: #c9a96e;
+            margin-bottom: 0.5rem;
+        }
+
+        .sky-weather {
+            font-size: 14px;
+            color: #8b7355;
+        }
+
+        .sky-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(201, 169, 110, 0.2);
+            color: #c9a96e;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* === TE ECHO DE MENOS === */
+        .miss-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .miss-card {
+            background-color: #1c1c35;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .miss-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: #c9a96e;
+            margin-bottom: 1rem;
+        }
+
+        .miss-count {
+            font-size: 18px;
+            color: #f5f0e8;
+            margin-bottom: 1.5rem;
+        }
+
+        .miss-btn {
+            background: none;
+            border: 1px solid #c9a96e;
+            color: #c9a96e;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 300ms;
+        }
+
+        .miss-btn:hover {
+            background-color: #c9a96e;
+            color: #07071a;
+        }
+
+        .miss-comparison {
+            grid-column: span 2;
+            text-align: center;
+            font-style: italic;
+            color: #c9a96e;
+            margin-top: 2rem;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .history-table th, .history-table td {
+            padding: 0.5rem;
+            text-align: center;
+            border-bottom: 0.5px solid rgba(201, 169, 110, 0.18);
+        }
+
+        .history-table th {
+            color: #c9a96e;
+            font-weight: 500;
+        }
+
+        /* === TIEMPO JUNTOS === */
+        .time-together {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .time-card {
+            background-color: #1c1c35;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .time-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 46px;
+            color: #c9a96e;
+            font-weight: 400;
+        }
+
+        .time-label {
+            font-size: 14px;
+            color: #8b7355;
+            margin-top: 0.5rem;
+        }
+
+        .anniversary-progress {
+            margin-top: 2rem;
+        }
+
+        .anniversary-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            color: #c9a96e;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 2px;
+            background-color: rgba(201, 169, 110, 0.2);
+            border-radius: 1px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #c9a96e, #8b7355);
+            transition: width 1s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 14px;
+            color: #8b7355;
+        }
+
+        /* === CUMPLEAÑOS === */
+        .birthdays {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .birthday-card {
+            background-color: #1c1c35;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .birthday-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 25px;
+            color: #c9a96e;
+            margin-bottom: 1rem;
+        }
+
+        .birthday-age {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 46px;
+            color: #c9a96e;
+            margin-bottom: 1rem;
+        }
+
+        .birthday-days {
+            font-size: 14px;
+            color: #8b7355;
+        }
+
+        .birthday-special {
+            color: #c9a96e;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        /* === PELÍCULAS === */
+        .movies-list {
+            list-style: none;
+        }
+
+        .movie-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 0.5px solid rgba(201, 169, 110, 0.18);
+        }
+
+        .movie-item.watched {
+            opacity: 0.4;
+        }
+
+        .movie-check {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #c9a96e;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 300ms;
+        }
+
+        .movie-check:hover {
+            background-color: #c9a96e;
+        }
+
+        .movie-check.checked {
+            background-color: #c9a96e;
+            color: #07071a;
+        }
+
+        .movie-title {
+            flex: 1;
+            font-size: 16px;
+        }
+
+        .movie-title.watched {
+            text-decoration: line-through;
+        }
+
+        .movie-badge {
+            font-size: 12px;
+            color: #c9a96e;
+            background-color: rgba(201, 169, 110, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+        }
+
+        .movie-delete {
+            cursor: pointer;
+            color: #8b7355;
+            font-size: 18px;
+            transition: color 300ms;
+        }
+
+        .movie-delete:hover {
+            color: #c9a96e;
+        }
+
+        .add-movie {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .add-movie input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 12px;
+            background-color: #1c1c35;
+            color: #f5f0e8;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .add-movie button {
+            background: none;
+            border: 1px solid #c9a96e;
+            color: #c9a96e;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 300ms;
+        }
+
+        .add-movie button:hover {
+            background-color: #c9a96e;
+            color: #07071a;
+        }
+
+        /* === MENSAJITOS === */
+        .messages {
+            text-align: center;
+        }
+
+        .message {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 25px;
+            font-style: italic;
+            color: #f5f0e8;
+            margin: 2rem 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .message.active {
+            opacity: 1;
+        }
+
+        .add-message {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .add-message input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 12px;
+            background-color: #1c1c35;
+            color: #f5f0e8;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .add-message button {
+            background: none;
+            border: 1px solid #c9a96e;
+            color: #c9a96e;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 300ms;
+        }
+
+        .add-message button:hover {
+            background-color: #c9a96e;
+            color: #07071a;
+        }
+
+        /* === RECORDATORIOS === */
+        .reminders-list {
+            list-style: none;
+        }
+
+        .reminder-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 0.5px solid rgba(201, 169, 110, 0.18);
+        }
+
+        .reminder-item.upcoming {
+            border-color: rgba(201, 169, 110, 0.5);
+        }
+
+        .reminder-date {
+            font-size: 16px;
+            color: #f5f0e8;
+            min-width: 100px;
+        }
+
+        .reminder-desc {
+            flex: 1;
+            font-size: 16px;
+        }
+
+        .reminder-badge {
+            font-size: 12px;
+            color: #c9a96e;
+            background-color: rgba(201, 169, 110, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+        }
+
+        .reminder-delete {
+            cursor: pointer;
+            color: #8b7355;
+            font-size: 18px;
+            transition: color 300ms;
+        }
+
+        .reminder-delete:hover {
+            color: #c9a96e;
+        }
+
+        .add-reminder {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .add-reminder input[type="date"] {
+            padding: 0.75rem;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 12px;
+            background-color: #1c1c35;
+            color: #f5f0e8;
+        }
+
+        .add-reminder input[type="text"] {
+            flex: 1;
+            padding: 0.75rem;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 12px;
+            background-color: #1c1c35;
+            color: #f5f0e8;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .add-reminder button {
+            background: none;
+            border: 1px solid #c9a96e;
+            color: #c9a96e;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 300ms;
+        }
+
+        .add-reminder button:hover {
+            background-color: #c9a96e;
+            color: #07071a;
+        }
+
+        /* === ANIMACIONES === */
+        .hearts {
+            position: fixed;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .heart {
+            position: absolute;
+            color: #c9a96e;
+            font-size: 24px;
+            animation: float 3s ease-out forwards;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(0); opacity: 0; }
+        }
+
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #c9a96e;
+            animation: fall 4s linear forwards;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(720deg); }
+        }
+
+        /* === RESPONSIVO === */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+                gap: 2rem;
+            }
+
+            .skies {
+                grid-template-columns: 1fr;
+            }
+
+            .miss-section {
+                grid-template-columns: 1fr;
+            }
+
+            .time-together {
+                grid-template-columns: 1fr;
+            }
+
+            .birthdays {
+                grid-template-columns: 1fr;
+            }
+
+            nav .nav-links {
+                gap: 1rem;
+            }
+
+            nav .nav-links a {
+                font-size: 8px;
+            }
+
+            .time-number {
+                font-size: 36px;
+            }
+
+            .birthday-age {
+                font-size: 36px;
+            }
+
+            .message {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="background-canvas"></canvas>
+
+    <nav>
+        <div class="logo">Mar & Franco</div>
+        <div class="nav-links">
+            <a href="#skies">Cielos</a>
+            <a href="#miss">Te echo de menos</a>
+            <a href="#time">Tiempo</a>
+            <a href="#movies">Pelis</a>
+            <a href="#messages">Mensajes</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- === CIÉLOS === -->
+        <section id="skies">
+            <h2>Cielos en Tiempo Real</h2>
+            <div class="skies">
+                <div class="sky-card">
+                    <canvas class="sky-canvas" id="mar-canvas"></canvas>
+                    <div class="sky-badge" id="mar-badge">Noche</div>
+                    <div class="sky-info">
+                        <div class="sky-name">Mar · Gavà</div>
+                        <div class="sky-time" id="mar-time">--:--:--</div>
+                        <div class="sky-weather" id="mar-weather">Cargando...</div>
+                    </div>
+                </div>
+                <div class="sky-card">
+                    <canvas class="sky-canvas" id="franco-canvas"></canvas>
+                    <div class="sky-badge" id="franco-badge">Noche</div>
+                    <div class="sky-info">
+                        <div class="sky-name">Franco · Buenos Aires</div>
+                        <div class="sky-time" id="franco-time">--:--:--</div>
+                        <div class="sky-weather" id="franco-weather">Cargando...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === TE ECHO DE MENOS === -->
+        <section id="miss">
+            <h2>Te Echo de Menos</h2>
+            <div class="miss-section">
+                <div class="miss-card">
+                    <div class="miss-name">Mar</div>
+                    <div class="miss-count" id="mar-count">Hoy: 0 veces</div>
+                    <button class="miss-btn" id="mar-btn">Te echo de menos, Franco</button>
+                </div>
+                <div class="miss-card">
+                    <div class="miss-name">Franco</div>
+                    <div class="miss-count" id="franco-count">Hoy: 0 veces</div>
+                    <button class="miss-btn" id="franco-btn">Te echo de menos, Mar</button>
+                </div>
+            </div>
+            <div class="miss-comparison" id="comparison">Están igualados hoy</div>
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Mar</th>
+                        <th>Franco</th>
+                    </tr>
+                </thead>
+                <tbody id="history-body"></tbody>
+            </table>
+        </section>
+
+        <!-- === TIEMPO JUNTOS === -->
+        <section id="time">
+            <h2>Tiempo Juntos</h2>
+            <div class="time-together">
+                <div class="time-card">
+                    <div class="time-number" id="years">0</div>
+                    <div class="time-label">años</div>
+                </div>
+                <div class="time-card">
+                    <div class="time-number" id="months">0</div>
+                    <div class="time-label">meses</div>
+                </div>
+                <div class="time-card">
+                    <div class="time-number" id="days">0</div>
+                    <div class="time-label">días</div>
+                </div>
+            </div>
+            <div class="anniversary-progress">
+                <div class="anniversary-title">Próximo aniversario · 5 de septiembre</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-text" id="progress-text">0 días desde el último · 0 días para el siguiente</div>
+            </div>
+        </section>
+
+        <!-- === CUMPLEAÑOS === -->
+        <section id="birthdays">
+            <h2>Cumpleaños</h2>
+            <div class="birthdays">
+                <div class="birthday-card">
+                    <div class="birthday-name">Franco</div>
+                    <div class="birthday-age" id="franco-age">0</div>
+                    <div class="birthday-days" id="franco-days">Faltan 0 días</div>
+                    <div class="birthday-special" id="franco-special" style="display: none;">¡Hoy es su cumpleaños! 🎂</div>
+                </div>
+                <div class="birthday-card">
+                    <div class="birthday-name">Mar</div>
+                    <div class="birthday-age" id="mar-age">0</div>
+                    <div class="birthday-days" id="mar-days">Faltan 0 días</div>
+                    <div class="birthday-special" id="mar-special" style="display: none;">¡Hoy es su cumpleaños! 🎂</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === PELÍCULAS === -->
+        <section id="movies">
+            <h2>Películas Pendientes</h2>
+            <div class="add-movie">
+                <input type="text" id="movie-input" placeholder="Añadir nueva película...">
+                <button id="add-movie-btn">Añadir</button>
+            </div>
+            <ul class="movies-list" id="movies-list"></ul>
+        </section>
+
+        <!-- === MENSAJITOS === -->
+        <section id="messages">
+            <h2>Mensajitos Bonitos</h2>
+            <div class="message active" id="current-message">La distancia es solo el espacio que hay entre dos personas que se quieren de verdad.</div>
+            <div class="add-message">
+                <input type="text" id="message-input" placeholder="Añadir nuevo mensajito...">
+                <button id="add-message-btn">Añadir</button>
+            </div>
+        </section>
+
+        <!-- === RECORDATORIOS === -->
+        <section id="reminders">
+            <h2>Recordatorios</h2>
+            <div class="add-reminder">
+                <input type="date" id="reminder-date">
+                <input type="text" id="reminder-text" placeholder="Descripción del recordatorio...">
+                <button id="add-reminder-btn">Añadir</button>
+            </div>
+            <ul class="reminders-list" id="reminders-list"></ul>
+        </section>
+    </div>
+
+    <div class="hearts" id="hearts"></div>
+    <div class="confetti" id="confetti"></div>
+
+    <script>
+        /* === CONSTANTES === */
+        const START_DATE = new Date('2021-09-05');
+        const FRANCO_BIRTHDAY = new Date('2004-08-14');
+        const MAR_BIRTHDAY = new Date('2007-02-15');
+        const MAR_LAT = 41.3045, MAR_LON = 1.9785;
+        const FRANCO_LAT = -34.6037, FRANCO_LON = -58.3816;
+        const WEATHER_CODES = {
+            0: 'Despejado',
+            1: 'Mayormente despejado',
+            2: 'Parcialmente nublado',
+            3: 'Nublado',
+            45: 'Niebla',
+            48: 'Niebla con escarcha',
+            51: 'Llovizna ligera',
+            53: 'Llovizna moderada',
+            55: 'Llovizna intensa',
+            56: 'Llovizna helada ligera',
+            57: 'Llovizna helada intensa',
+            61: 'Lluvia ligera',
+            63: 'Lluvia moderada',
+            65: 'Lluvia intensa',
+            66: 'Lluvia helada ligera',
+            67: 'Lluvia helada intensa',
+            71: 'Nieve ligera',
+            73: 'Nieve moderada',
+            75: 'Nieve intensa',
+            77: 'Granizo',
+            80: 'Chubasco ligero',
+            81: 'Chubasco moderado',
+            82: 'Chubasco intenso',
+            85: 'Chubasco de nieve ligero',
+            86: 'Chubasco de nieve intenso',
+            95: 'Tormenta ligera',
+            96: 'Tormenta con granizo ligero',
+            99: 'Tormenta con granizo intenso'
+        };
+
+        /* === CANVAS FONDO === */
+        const bgCanvas = document.getElementById('background-canvas');
+        const bgCtx = bgCanvas.getContext('2d');
+        let bgWidth, bgHeight;
+
+        function resizeBgCanvas() {
+            bgWidth = window.innerWidth;
+            bgHeight = window.innerHeight;
+            bgCanvas.width = bgWidth;
+            bgCanvas.height = bgHeight;
+        }
+
+        // Estrellas
+        const stars = [];
+        for (let i = 0; i < 300; i++) {
+            stars.push({
+                x: Math.random() * bgWidth,
+                y: Math.random() * bgHeight,
+                size: Math.random() * 1.2 + 0.2,
+                color: ['#fff', '#f5f0e8', '#add8e6', '#ffb6c1'][Math.floor(Math.random() * 4)],
+                opacity: Math.random() * 0.5 + 0.5,
+                twinkle: Math.random() * 0.1
+            });
+        }
+
+        // Constelaciones
+        const constellations = [
+            { name: 'Orión', points: [[0.2, 0.3], [0.25, 0.35], [0.3, 0.3], [0.25, 0.25], [0.2, 0.25]] },
+            { name: 'Osa Mayor', points: [[0.7, 0.2], [0.75, 0.25], [0.8, 0.2], [0.85, 0.25], [0.8, 0.3], [0.75, 0.35], [0.7, 0.3]] },
+            { name: 'Casiopea', points: [[0.1, 0.1], [0.15, 0.15], [0.2, 0.1], [0.25, 0.15], [0.3, 0.1]] },
+            { name: 'Cruz del Sur', points: [[0.8, 0.7], [0.85, 0.75], [0.8, 0.8], [0.75, 0.75], [0.8, 0.7]] },
+            { name: 'Escorpión', points: [[0.5, 0.8], [0.55, 0.85], [0.6, 0.8], [0.65, 0.85], [0.7, 0.8]] }
+        ];
+
+        // Nebulosas
+        const nebulas = [
+            { x: 0.1 * bgWidth, y: 0.2 * bgHeight, radius: 150, color: 'rgba(138, 43, 226, 0.05)' },
+            { x: 0.8 * bgWidth, y: 0.8 * bgHeight, radius: 200, color: 'rgba(0, 191, 255, 0.03)' }
+        ];
+
+        // Estrellas fugaces
+        let shootingStars = [];
+
+        function createShootingStar() {
+            shootingStars.push({
+                x: Math.random() * bgWidth,
+                y: Math.random() * bgHeight * 0.5,
+                length: Math.random() * 100 + 50,
+                speed: Math.random() * 2 + 1,
+                opacity: 1
+            });
+        }
+
+        function drawBg() {
+            // Gradiente radial
+            const gradient = bgCtx.createRadialGradient(bgWidth / 2, bgHeight / 2, 0, bgWidth / 2, bgHeight / 2, Math.max(bgWidth, bgHeight) / 2);
+            gradient.addColorStop(0, '#07071a');
+            gradient.addColorStop(1, '#1a1040');
+            bgCtx.fillStyle = gradient;
+            bgCtx.fillRect(0, 0, bgWidth, bgHeight);
+
+            // Nebulosas
+            nebulas.forEach(nebula => {
+                bgCtx.beginPath();
+                bgCtx.arc(nebula.x, nebula.y, nebula.radius, 0, Math.PI * 2);
+                bgCtx.fillStyle = nebula.color;
+                bgCtx.fill();
+            });
+
+            // Estrellas
+            stars.forEach(star => {
+                bgCtx.globalAlpha = star.opacity + Math.sin(Date.now() * 0.001 + star.twinkle) * 0.2;
+                bgCtx.fillStyle = star.color;
+                bgCtx.beginPath();
+                bgCtx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                bgCtx.fill();
+            });
+            bgCtx.globalAlpha = 1;
+
+            // Constelaciones
+            constellations.forEach(constellation => {
+                bgCtx.strokeStyle = `rgba(201, 169, 110, ${0.15 + Math.sin(Date.now() * 0.002) * 0.1})`;
+                bgCtx.lineWidth = 1;
+                bgCtx.beginPath();
+                constellation.points.forEach((point, i) => {
+                    const x = point[0] * bgWidth;
+                    const y = point[1] * bgHeight;
+                    if (i === 0) bgCtx.moveTo(x, y);
+                    else bgCtx.lineTo(x, y);
+                });
+                bgCtx.stroke();
+
+                // Nombre
+                const centerX = constellation.points.reduce((sum, p) => sum + p[0], 0) / constellation.points.length * bgWidth;
+                const centerY = constellation.points.reduce((sum, p) => sum + p[1], 0) / constellation.points.length * bgHeight + 20;
+                bgCtx.fillStyle = `rgba(201, 169, 110, 0.3)`;
+                bgCtx.font = '12px Arial';
+                bgCtx.textAlign = 'center';
+                bgCtx.fillText(constellation.name, centerX, centerY);
+            });
+
+            // Estrellas fugaces
+            shootingStars.forEach((star, i) => {
+                bgCtx.strokeStyle = `rgba(255, 255, 255, ${star.opacity})`;
+                bgCtx.lineWidth = 2;
+                bgCtx.beginPath();
+                bgCtx.moveTo(star.x, star.y);
+                bgCtx.lineTo(star.x - star.length, star.y + star.length * 0.5);
+                bgCtx.stroke();
+                star.x -= star.speed;
+                star.y += star.speed * 0.5;
+                star.opacity -= 0.01;
+                if (star.opacity <= 0) shootingStars.splice(i, 1);
+            });
+        }
+
+        function animateBg() {
+            drawBg();
+            requestAnimationFrame(animateBg);
+        }
+
+        // Crear estrella fugaz cada 5-15 segundos
+        setInterval(() => {
+            if (Math.random() < 0.3) createShootingStar();
+        }, 5000 + Math.random() * 10000);
+
+        /* === CIÉLOS === */
+        const marCanvas = document.getElementById('mar-canvas');
+        const marCtx = marCanvas.getContext('2d');
+        const francoCanvas = document.getElementById('franco-canvas');
+        const francoCtx = francoCanvas.getContext('2d');
+
+        function resizeSkyCanvases() {
+            marCanvas.width = marCanvas.offsetWidth;
+            marCanvas.height = marCanvas.offsetHeight;
+            francoCanvas.width = francoCanvas.offsetWidth;
+            francoCanvas.height = francoCanvas.offsetHeight;
+        }
+
+        function getTimePeriod(hour) {
+            if (hour >= 0 && hour < 6) return 'Noche';
+            if (hour >= 6 && hour < 9) return 'Amanecer';
+            if (hour >= 9 && hour < 18) return 'Día';
+            if (hour >= 18 && hour < 21) return 'Atardecer';
+            return 'Noche';
+        }
+
+        function drawSky(ctx, hour, minute) {
+            const width = ctx.canvas.width;
+            const height = ctx.canvas.height;
+
+            let colors, sunX, sunY, sunRadius, clouds = [];
+
+            if (hour >= 0 && hour < 6) {
+                // Noche
+                colors = ['#040418', '#0f0f2a'];
+                // Estrellas
+                for (let i = 0; i < 50; i++) {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${0.5 + Math.sin(Date.now() * 0.001 + i) * 0.3})`;
+                    ctx.beginPath();
+                    ctx.arc(Math.random() * width, Math.random() * height * 0.7, 1, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                // Luna
+                ctx.fillStyle = '#f5f0e8';
+                ctx.beginPath();
+                ctx.arc(width * 0.8, height * 0.2, 20, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (hour >= 6 && hour < 9) {
+                // Amanecer
+                const progress = (hour - 6 + minute / 60) / 3;
+                const r1 = Math.floor(26 + (122 - 26) * progress);
+                const g1 = Math.floor(10 + (46 - 10) * progress);
+                const b1 = Math.floor(46 + (94 - 46) * progress);
+                const r2 = Math.floor(122 + (232 - 122) * progress);
+                const g2 = Math.floor(45 + (142 - 45) * progress);
+                const b2 = Math.floor(94 + (167 - 94) * progress);
+                colors = [`rgb(${r1}, ${g1}, ${b1})`, `rgb(${r2}, ${g2}, ${b2})`];
+                sunX = width * 0.5;
+                sunY = height * (0.8 - progress * 0.6);
+                sunRadius = 30;
+                // Nubes tenues
+                clouds = [{ x: width * 0.2, y: height * 0.3, speed: 0.5 }];
+            } else if (hour >= 9 && hour < 18) {
+                // Día
+                colors = ['#1565a8', '#7ec8e8'];
+                const sunAngle = ((hour - 9) / 9) * Math.PI;
+                sunX = width * 0.5 + Math.cos(sunAngle - Math.PI / 2) * width * 0.4;
+                sunY = height * 0.5 + Math.sin(sunAngle - Math.PI / 2) * height * 0.3;
+                sunRadius = 40;
+                // Nubes
+                clouds = [
+                    { x: width * 0.1, y: height * 0.2, speed: 1 },
+                    { x: width * 0.6, y: height * 0.4, speed: 0.8 },
+                    { x: width * 0.3, y: height * 0.6, speed: 1.2 }
+                ];
+            } else if (hour >= 18 && hour < 21) {
+                // Atardecer
+                const progress = (hour - 18 + minute / 60) / 3;
+                const r1 = Math.floor(45 + (45 - 45) * progress);
+                const g1 = Math.floor(16 + (96 - 16) * progress);
+                const b1 = Math.floor(96 + (96 - 96) * progress);
+                const r2 = Math.floor(232 + (232 - 232) * progress);
+                const g2 = Math.floor(100 + (100 - 100) * progress);
+                const b2 = Math.floor(58 + (58 - 58) * progress);
+                colors = [`rgb(${r1}, ${g1}, ${b1})`, `rgb(${r2}, ${g2}, ${b2})`];
+                sunX = width * 0.5;
+                sunY = height * (0.2 + progress * 0.6);
+                sunRadius = 35;
+                // Nubes teñidas
+                clouds = [{ x: width * 0.4, y: height * 0.3, speed: 0.7 }];
+            } else {
+                // Noche cerrada
+                colors = ['#080820', '#1e3a6e'];
+                // Muchas estrellas
+                for (let i = 0; i < 100; i++) {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${0.3 + Math.sin(Date.now() * 0.001 + i) * 0.2})`;
+                    ctx.beginPath();
+                    ctx.arc(Math.random() * width, Math.random() * height * 0.8, 0.5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                // Luna
+                ctx.fillStyle = '#e8e8e8';
+                ctx.beginPath();
+                ctx.arc(width * 0.7, height * 0.15, 25, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Gradiente
+            const gradient = ctx.createLinearGradient(0, 0, 0, height);
+            gradient.addColorStop(0, colors[0]);
+            gradient.addColorStop(1, colors[1]);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // Sol
+            if (sunX !== undefined) {
+                const sunGradient = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunRadius);
+                sunGradient.addColorStop(0, 'rgba(255, 255, 0, 0.8)');
+                sunGradient.addColorStop(1, 'rgba(255, 165, 0, 0.4)');
+                ctx.fillStyle = sunGradient;
+                ctx.beginPath();
+                ctx.arc(sunX, sunY, sunRadius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Nubes
+            clouds.forEach(cloud => {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                ctx.beginPath();
+                ctx.arc(cloud.x, cloud.y, 20, 0, Math.PI * 2);
+                ctx.arc(cloud.x + 15, cloud.y, 25, 0, Math.PI * 2);
+                ctx.arc(cloud.x + 30, cloud.y, 20, 0, Math.PI * 2);
+                ctx.fill();
+                cloud.x += cloud.speed;
+                if (cloud.x > width + 50) cloud.x = -50;
+            });
+        }
+
+        function updateTimes() {
+            const now = new Date();
+
+            // Mar: detectar offset
+            const marFormatter = new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid' });
+            const marTime = new Date(marFormatter.format(now));
+            const marHour = marTime.getHours();
+            const marMinute = marTime.getMinutes();
+            const marSecond = marTime.getSeconds();
+
+            document.getElementById('mar-time').textContent = `${marHour.toString().padStart(2, '0')}:${marMinute.toString().padStart(2, '0')}:${marSecond.toString().padStart(2, '0')}`;
+            document.getElementById('mar-badge').textContent = getTimePeriod(marHour);
+            drawSky(marCtx, marHour, marMinute);
+
+            // Franco: UTC-3
+            const francoTime = new Date(now.getTime() - 3 * 60 * 60 * 1000);
+            const francoHour = francoTime.getHours();
+            const francoMinute = francoTime.getMinutes();
+            const francoSecond = francoTime.getSeconds();
+
+            document.getElementById('franco-time').textContent = `${francoHour.toString().padStart(2, '0')}:${francoMinute.toString().padStart(2, '0')}:${francoSecond.toString().padStart(2, '0')}`;
+            document.getElementById('franco-badge').textContent = getTimePeriod(francoHour);
+            drawSky(francoCtx, francoHour, francoMinute);
+        }
+
+        async function updateWeather() {
+            try {
+                const [marResponse, francoResponse] = await Promise.all([
+                    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${MAR_LAT}&longitude=${MAR_LON}&current_weather=true`),
+                    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${FRANCO_LAT}&longitude=${FRANCO_LON}&current_weather=true`)
+                ]);
+
+                const marData = await marResponse.json();
+                const francoData = await francoResponse.json();
+
+                document.getElementById('mar-weather').textContent = `${marData.current_weather.temperature}°C - ${WEATHER_CODES[marData.current_weather.weathercode] || 'Desconocido'}`;
+                document.getElementById('franco-weather').textContent = `${francoData.current_weather.temperature}°C - ${WEATHER_CODES[francoData.current_weather.weathercode] || 'Desconocido'}`;
+            } catch (error) {
+                console.error('Error fetching weather:', error);
+                document.getElementById('mar-weather').textContent = 'Clima no disponible (abre desde servidor)';
+                document.getElementById('franco-weather').textContent = 'Clima no disponible (abre desde servidor)';
+            }
+        }
+
+        /* === TE ECHO DE MENOS === */
+        let missData = JSON.parse(localStorage.getItem('missData')) || { history: [] };
+
+        function updateMiss() {
+            const today = new Date().toDateString();
+            const todayData = missData.history.find(h => h.date === today) || { mar: 0, franco: 0 };
+            document.getElementById('mar-count').textContent = `Hoy: ${todayData.mar} veces`;
+            document.getElementById('franco-count').textContent = `Hoy: ${todayData.franco} veces`;
+
+            const comparison = document.getElementById('comparison');
+            if (todayData.mar > todayData.franco) {
+                comparison.textContent = 'Mar te echa más de menos hoy';
+            } else if (todayData.franco > todayData.mar) {
+                comparison.textContent = 'Franco te echa más de menos hoy';
+            } else {
+                comparison.textContent = 'Están igualados hoy';
+            }
+
+            const tbody = document.getElementById('history-body');
+            tbody.innerHTML = '';
+            const last7Days = missData.history.slice(-7);
+            last7Days.forEach(day => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${new Date(day.date).toLocaleDateString('es-ES')}</td><td>${day.mar}</td><td>${day.franco}</td>`;
+                tbody.appendChild(row);
+            });
+        }
+
+        function missClick(person) {
+            const today = new Date().toDateString();
+            let todayData = missData.history.find(h => h.date === today);
+            if (!todayData) {
+                todayData = { date: today, mar: 0, franco: 0 };
+                missData.history.push(todayData);
+            }
+            todayData[person]++;
+            localStorage.setItem('missData', JSON.stringify(missData));
+            updateMiss();
+
+            // Animación corazones
+            const hearts = document.getElementById('hearts');
+            for (let i = 0; i < 8; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = '♥';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDelay = `${Math.random() * 0.5}s`;
+                hearts.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+
+        /* === TIEMPO JUNTOS === */
+        function updateTimeTogether() {
+            const now = new Date();
+            const diff = now - START_DATE;
+            const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const years = Math.floor(totalDays / 365.25);
+            const months = Math.floor((totalDays % 365.25) / 30.44);
+
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = totalDays;
+
+            // Aniversario
+            const currentYear = now.getFullYear();
+            let nextAnniversary = new Date(currentYear, 8, 5);
+            if (now > nextAnniversary) nextAnniversary = new Date(currentYear + 1, 8, 5);
+            const lastAnniversary = new Date(currentYear - (now > new Date(currentYear, 8, 5) ? 0 : 1), 8, 5);
+            const progress = ((now - lastAnniversary) / (nextAnniversary - lastAnniversary)) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            const daysSince = Math.floor((now - lastAnniversary) / (1000 * 60 * 60 * 24));
+            const daysTo = Math.floor((nextAnniversary - now) / (1000 * 60 * 60 * 24));
+            document.getElementById('progress-text').textContent = `${daysSince} días desde el último · ${daysTo} días para el siguiente`;
+        }
+
+        /* === CUMPLEAÑOS === */
+        function updateBirthdays() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+
+            // Franco
+            let francoNext = new Date(currentYear, 7, 14);
+            if (now > francoNext) francoNext = new Date(currentYear + 1, 7, 14);
+            const francoAge = currentYear - 2004 - (now < new Date(currentYear, 7, 14) ? 1 : 0);
+            const francoDays = Math.floor((francoNext - now) / (1000 * 60 * 60 * 24));
+            document.getElementById('franco-age').textContent = francoAge;
+            document.getElementById('franco-days').textContent = `Faltan ${francoDays} días`;
+            const francoSpecial = document.getElementById('franco-special');
+            if (francoDays === 0) {
+                francoSpecial.style.display = 'block';
+                launchConfetti();
+            } else {
+                francoSpecial.style.display = 'none';
+            }
+
+            // Mar
+            let marNext = new Date(currentYear, 1, 15);
+            if (now > marNext) marNext = new Date(currentYear + 1, 1, 15);
+            const marAge = currentYear - 2007 - (now < new Date(currentYear, 1, 15) ? 1 : 0);
+            const marDays = Math.floor((marNext - now) / (1000 * 60 * 60 * 24));
+            document.getElementById('mar-age').textContent = marAge;
+            document.getElementById('mar-days').textContent = `Faltan ${marDays} días`;
+            const marSpecial = document.getElementById('mar-special');
+            if (marDays === 0) {
+                marSpecial.style.display = 'block';
+                launchConfetti();
+            } else {
+                marSpecial.style.display = 'none';
+            }
+        }
+
+        function launchConfetti() {
+            const confetti = document.getElementById('confetti');
+            for (let i = 0; i < 100; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = `${Math.random() * 100}%`;
+                piece.style.backgroundColor = ['#c9a96e', '#8b7355', '#f5f0e8', '#add8e6', '#ffb6c1'][Math.floor(Math.random() * 5)];
+                piece.style.animationDelay = `${Math.random() * 2}s`;
+                confetti.appendChild(piece);
+                setTimeout(() => piece.remove(), 4000);
+            }
+        }
+
+        /* === PELÍCULAS === */
+        let movies = JSON.parse(localStorage.getItem('movies')) || [
+            { title: 'Antes del amanecer', watched: false },
+            { title: 'Eternal Sunshine of the Spotless Mind', watched: false },
+            { title: 'Call Me by Your Name', watched: false },
+            { title: 'Her', watched: false },
+            { title: 'Lost in Translation', watched: false },
+            { title: 'Amélie', watched: false }
+        ];
+
+        function updateMovies() {
+            const list = document.getElementById('movies-list');
+            list.innerHTML = '';
+            movies.forEach((movie, index) => {
+                const li = document.createElement('li');
+                li.className = 'movie-item';
+                if (movie.watched) li.classList.add('watched');
+                li.innerHTML = `
+                    <div class="movie-check ${movie.watched ? 'checked' : ''}" onclick="toggleMovie(${index})">✓</div>
+                    <span class="movie-title ${movie.watched ? 'watched' : ''}">${movie.title}</span>
+                    ${movie.watched ? '<span class="movie-badge">Vista ♥</span>' : ''}
+                    <span class="movie-delete" onclick="deleteMovie(${index})">×</span>
+                `;
+                list.appendChild(li);
+            });
+            localStorage.setItem('movies', JSON.stringify(movies));
+        }
+
+        function addMovie() {
+            const input = document.getElementById('movie-input');
+            if (input.value.trim()) {
+                movies.push({ title: input.value.trim(), watched: false });
+                input.value = '';
+                updateMovies();
+            }
+        }
+
+        function toggleMovie(index) {
+            movies[index].watched = !movies[index].watched;
+            updateMovies();
+        }
+
+        function deleteMovie(index) {
+            movies.splice(index, 1);
+            updateMovies();
+        }
+
+        /* === MENSAJITOS === */
+        let messages = JSON.parse(localStorage.getItem('messages')) || [
+            "La distancia es solo el espacio que hay entre dos personas que se quieren de verdad.",
+            "Me gusta que existas en el mundo, aunque el mundo sea tan grande.",
+            "No sé cuántos kilómetros nos separan, pero sé que pienso en ti cada día.",
+            "Algún día contaremos esta historia y diremos que valió la pena.",
+            "Eres mi lugar favorito aunque no estés cerca.",
+            "Te quiero con la misma intensidad con la que la luna quiere al mar."
+        ];
+
+        let currentMessageIndex = 0;
+
+        function updateMessage() {
+            const messageEl = document.getElementById('current-message');
+            messageEl.classList.remove('active');
+            setTimeout(() => {
+                messageEl.textContent = messages[currentMessageIndex];
+                messageEl.classList.add('active');
+                currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+            }, 500);
+        }
+
+        function addMessage() {
+            const input = document.getElementById('message-input');
+            if (input.value.trim()) {
+                messages.push(input.value.trim());
+                input.value = '';
+                localStorage.setItem('messages', JSON.stringify(messages));
+            }
+        }
+
+        /* === RECORDATORIOS === */
+        let reminders = JSON.parse(localStorage.getItem('reminders')) || [
+            { date: '2026-09-05', desc: 'Aniversario' },
+            { date: '2026-08-14', desc: 'Cumpleaños de Franco' },
+            { date: '2026-02-15', desc: 'Cumpleaños de Mar' }
+        ];
+
+        function updateReminders() {
+            const list = document.getElementById('reminders-list');
+            list.innerHTML = '';
+            const now = new Date();
+            const threeDaysFromNow = new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000);
+
+            reminders.forEach((reminder, index) => {
+                const li = document.createElement('li');
+                li.className = 'reminder-item';
+                const reminderDate = new Date(reminder.date);
+                if (reminderDate <= threeDaysFromNow && reminderDate >= now) {
+                    li.classList.add('upcoming');
+                }
+                const dateStr = reminderDate.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                let badge = '';
+                if (reminderDate.toDateString() === now.toDateString()) {
+                    badge = '<span class="reminder-badge">Hoy</span>';
+                } else if (reminderDate <= threeDaysFromNow && reminderDate > now) {
+                    badge = '<span class="reminder-badge">Pronto</span>';
+                }
+                li.innerHTML = `
+                    <span class="reminder-date">${dateStr}</span>
+                    <span class="reminder-desc">${reminder.desc}</span>
+                    ${badge}
+                    <span class="reminder-delete" onclick="deleteReminder(${index})">×</span>
+                `;
+                list.appendChild(li);
+            });
+            localStorage.setItem('reminders', JSON.stringify(reminders));
+        }
+
+        function addReminder() {
+            const dateInput = document.getElementById('reminder-date');
+            const textInput = document.getElementById('reminder-text');
+            if (dateInput.value && textInput.value.trim()) {
+                reminders.push({ date: dateInput.value, desc: textInput.value.trim() });
+                dateInput.value = '';
+                textInput.value = '';
+                updateReminders();
+            }
+        }
+
+        function deleteReminder(index) {
+            reminders.splice(index, 1);
+            updateReminders();
+        }
+
+        /* === NAVEGACIÓN === */
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        /* === INICIALIZACIÓN === */
+        window.addEventListener('load', () => {
+            resizeBgCanvas();
+            resizeSkyCanvases();
+            animateBg();
+            updateTimes();
+            updateWeather();
+            updateTimeTogether();
+            updateBirthdays();
+            updateMiss();
+            updateMovies();
+            updateReminders();
+
+            // Eventos
+            document.getElementById('mar-btn').addEventListener('click', () => missClick('mar'));
+            document.getElementById('franco-btn').addEventListener('click', () => missClick('franco'));
+            document.getElementById('add-movie-btn').addEventListener('click', addMovie);
+            document.getElementById('movie-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') addMovie();
+            });
+            document.getElementById('add-message-btn').addEventListener('click', addMessage);
+            document.getElementById('message-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') addMessage();
+            });
+            document.getElementById('add-reminder-btn').addEventListener('click', addReminder);
+
+            // Actualizaciones periódicas
+            setInterval(updateTimes, 1000);
+            setInterval(updateWeather, 600000); // 10 minutos
+            setInterval(updateMessage, 8000); // 8 segundos
+        });
+
+        window.addEventListener('resize', () => {
+            resizeBgCanvas();
+            resizeSkyCanvases();
+        });
+    </script>
+</body>
+</html>
