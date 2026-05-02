@@ -94,6 +94,17 @@
             transition: all 300ms;
         }
 
+        .site-note {
+            margin-bottom: 1.5rem;
+            padding: 1rem 1.25rem;
+            background-color: rgba(33, 34, 60, 0.9);
+            border: 1px solid rgba(201, 169, 110, 0.18);
+            border-radius: 16px;
+            color: #d4c88f;
+            text-align: center;
+            font-size: 14px;
+        }
+
         section:hover {
             border-color: rgba(201, 169, 110, 0.3);
         }
@@ -130,11 +141,35 @@
             position: relative;
         }
 
-        .sky-canvas {
+        .sky-photo-wrapper {
+            position: relative;
             width: 100%;
             height: 250px;
+            overflow: hidden;
             border-radius: 12px;
+        }
+
+        .sky-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             display: block;
+            opacity: 0;
+            transition: opacity 800ms ease;
+        }
+
+        .sky-photo.show {
+            opacity: 1;
+        }
+
+        .sky-overlay {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 55%;
+            background: linear-gradient(180deg, rgba(7,7,26,0) 0%, rgba(7,7,26,0.9) 100%);
+            pointer-events: none;
         }
 
         .sky-info {
@@ -441,6 +476,232 @@
             color: #07071a;
         }
 
+        /* === CANCIONES === */
+        .song-search {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .song-search input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 12px;
+            background-color: #1c1c35;
+            color: #f5f0e8;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .song-search .search-hint {
+            font-size: 13px;
+            color: #b0a176;
+            line-height: 1.4;
+            margin-top: -0.5rem;
+        }
+
+        .search-empty {
+            color: #d2c090;
+            grid-column: 1 / -1;
+            padding: 1rem;
+            background: rgba(24, 24, 44, 0.6);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .search-results {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .result-card {
+            background-color: #1c1c35;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 16px;
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .result-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .result-details {
+            flex: 1;
+        }
+
+        .result-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            color: #f5f0e8;
+            margin-bottom: 0.25rem;
+        }
+
+        .result-artist {
+            font-size: 13px;
+            color: #8b7355;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-card button {
+            background: none;
+            border: 1px solid #c9a96e;
+            color: #c9a96e;
+            padding: 0.5rem 0.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 300ms;
+            font-size: 12px;
+        }
+
+        .result-card button:hover {
+            background-color: #c9a96e;
+            color: #07071a;
+        }
+
+        .song-form {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .song-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .song-form input,
+        .song-form select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 12px;
+            background-color: #1c1c35;
+            color: #f5f0e8;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .song-form textarea {
+            width: 100%;
+            min-height: 90px;
+            resize: vertical;
+            padding: 0.75rem;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 12px;
+            background-color: #1c1c35;
+            color: #f5f0e8;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .song-form button {
+            width: fit-content;
+            background: none;
+            border: 1px solid #c9a96e;
+            color: #c9a96e;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 300ms;
+        }
+
+        .song-form button:hover {
+            background-color: #c9a96e;
+            color: #07071a;
+        }
+
+        .saved-songs {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .saved-song {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #1c1c35;
+            border: 0.5px solid rgba(201, 169, 110, 0.18);
+            border-radius: 16px;
+        }
+
+        .saved-song img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .saved-song-info {
+            flex: 1;
+        }
+
+        .saved-song-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            color: #f5f0e8;
+            margin-bottom: 0.25rem;
+        }
+
+        .saved-song-artist {
+            font-size: 13px;
+            color: #8b7355;
+            margin-bottom: 0.25rem;
+        }
+
+        .saved-song-date {
+            font-size: 12px;
+            color: #c9a96e;
+            margin-bottom: 0.25rem;
+        }
+
+        .saved-song-note {
+            font-size: 13px;
+            color: #f5f0e8;
+            font-style: italic;
+            margin-bottom: 0.25rem;
+        }
+
+        .song-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+
+        .song-actions button {
+            background: none;
+            border: 1px solid #c9a96e;
+            color: #c9a96e;
+            padding: 0.5rem 0.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 300ms;
+            font-size: 12px;
+        }
+
+        .song-actions button:hover {
+            background-color: #c9a96e;
+            color: #07071a;
+        }
+
+        .song-badge {
+            font-size: 12px;
+            color: #c9a96e;
+            background-color: rgba(201, 169, 110, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 0.25rem;
+        }
+
         /* === MENSAJITOS === */
         .messages {
             text-align: center;
@@ -661,6 +922,14 @@
             .message {
                 font-size: 20px;
             }
+
+            .search-results {
+                grid-template-columns: 1fr;
+            }
+
+            .song-form-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -675,6 +944,7 @@
             <a href="#time">Tiempo</a>
             <a href="#movies">Pelis</a>
             <a href="#messages">Mensajes</a>
+            <a href="#songs">Canciones</a>
         </div>
     </nav>
 
@@ -684,7 +954,10 @@
             <h2>Cielos en Tiempo Real</h2>
             <div class="skies">
                 <div class="sky-card">
-                    <canvas class="sky-canvas" id="mar-canvas"></canvas>
+                    <div class="sky-photo-wrapper">
+                        <img class="sky-photo" id="mar-photo" src="" alt="Cielo de Gavà">
+                        <div class="sky-overlay"></div>
+                    </div>
                     <div class="sky-badge" id="mar-badge">Noche</div>
                     <div class="sky-info">
                         <div class="sky-name">Mar · Gavà</div>
@@ -693,7 +966,10 @@
                     </div>
                 </div>
                 <div class="sky-card">
-                    <canvas class="sky-canvas" id="franco-canvas"></canvas>
+                    <div class="sky-photo-wrapper">
+                        <img class="sky-photo" id="franco-photo" src="" alt="Cielo de Buenos Aires">
+                        <div class="sky-overlay"></div>
+                    </div>
                     <div class="sky-badge" id="franco-badge">Noche</div>
                     <div class="sky-info">
                         <div class="sky-name">Franco · Buenos Aires</div>
@@ -795,6 +1071,30 @@
                 <input type="text" id="message-input" placeholder="Añadir nuevo mensajito...">
                 <button id="add-message-btn">Añadir</button>
             </div>
+        </section>
+
+        <!-- === CANCIONES === -->
+        <section id="songs">
+            <h2>Canciones que me recuerdan a ti</h2>
+            <div class="song-search">
+                <input type="text" id="song-query" placeholder="Buscar canción o dejar vacío para novedades del día">
+                <div class="search-hint">Sin registro. Resultados actualizados con canciones recientes y lanzamientos del momento.</div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+            <div class="song-form">
+                <input type="text" id="song-title" placeholder="Título de canción" readonly>
+                <input type="text" id="song-artist" placeholder="Artista" readonly>
+                <div class="song-form-row">
+                    <select id="song-who">
+                        <option value="Mar">Mar</option>
+                        <option value="Franco">Franco</option>
+                    </select>
+                    <input type="date" id="song-date">
+                </div>
+                <textarea id="song-note" placeholder="¿por qué te recuerda a él/ella? (120 caracteres)" maxlength="120"></textarea>
+                <button id="save-song-btn">Guardar canción</button>
+            </div>
+            <div class="saved-songs" id="saved-songs"></div>
         </section>
 
         <!-- === RECORDATORIOS === -->
@@ -977,16 +1277,44 @@
         }, 5000 + Math.random() * 10000);
 
         /* === CIÉLOS === */
-        const marCanvas = document.getElementById('mar-canvas');
-        const marCtx = marCanvas.getContext('2d');
-        const francoCanvas = document.getElementById('franco-canvas');
-        const francoCtx = francoCanvas.getContext('2d');
+        const marPhoto = document.getElementById('mar-photo');
+        const francoPhoto = document.getElementById('franco-photo');
+        let marWeathercode = 0;
+        let francoWeathercode = 0;
 
-        function resizeSkyCanvases() {
-            marCanvas.width = marCanvas.offsetWidth;
-            marCanvas.height = marCanvas.offsetHeight;
-            francoCanvas.width = francoCanvas.offsetWidth;
-            francoCanvas.height = francoCanvas.offsetHeight;
+        const IMAGE_URLS = {
+            night: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80',
+            dawn: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80',
+            dayClear: 'https://images.unsplash.com/photo-1601297183305-6df142704ea2?w=800&q=80',
+            dayCloudy: 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=800&q=80',
+            sunset: 'https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=800&q=80',
+            nightDeep: 'https://images.unsplash.com/photo-1475274047050-1d0c0975de51?w=800&q=80'
+        };
+
+        function getLocalTime(offsetHours) {
+            const now = new Date();
+            const utcMs = now.getTime() + now.getTimezoneOffset() * 60000;
+            return new Date(utcMs + offsetHours * 3600000);
+        }
+
+        function getZoneTime(timeZone) {
+            const now = new Date();
+            const parts = new Intl.DateTimeFormat('en-US', {
+                timeZone,
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            }).formatToParts(now);
+            const values = {};
+            parts.forEach(part => {
+                if (part.type !== 'literal') values[part.type] = part.value;
+            });
+            return {
+                hour: Number(values.hour),
+                minute: Number(values.minute),
+                second: Number(values.second)
+            };
         }
 
         function getTimePeriod(hour) {
@@ -997,141 +1325,43 @@
             return 'Noche';
         }
 
-        function drawSky(ctx, hour, minute) {
-            const width = ctx.canvas.width;
-            const height = ctx.canvas.height;
-
-            let colors, sunX, sunY, sunRadius, clouds = [];
-
-            if (hour >= 0 && hour < 6) {
-                // Noche
-                colors = ['#040418', '#0f0f2a'];
-                // Estrellas
-                for (let i = 0; i < 50; i++) {
-                    ctx.fillStyle = `rgba(255, 255, 255, ${0.5 + Math.sin(Date.now() * 0.001 + i) * 0.3})`;
-                    ctx.beginPath();
-                    ctx.arc(Math.random() * width, Math.random() * height * 0.7, 1, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                // Luna
-                ctx.fillStyle = '#f5f0e8';
-                ctx.beginPath();
-                ctx.arc(width * 0.8, height * 0.2, 20, 0, Math.PI * 2);
-                ctx.fill();
-            } else if (hour >= 6 && hour < 9) {
-                // Amanecer
-                const progress = (hour - 6 + minute / 60) / 3;
-                const r1 = Math.floor(26 + (122 - 26) * progress);
-                const g1 = Math.floor(10 + (46 - 10) * progress);
-                const b1 = Math.floor(46 + (94 - 46) * progress);
-                const r2 = Math.floor(122 + (232 - 122) * progress);
-                const g2 = Math.floor(45 + (142 - 45) * progress);
-                const b2 = Math.floor(94 + (167 - 94) * progress);
-                colors = [`rgb(${r1}, ${g1}, ${b1})`, `rgb(${r2}, ${g2}, ${b2})`];
-                sunX = width * 0.5;
-                sunY = height * (0.8 - progress * 0.6);
-                sunRadius = 30;
-                // Nubes tenues
-                clouds = [{ x: width * 0.2, y: height * 0.3, speed: 0.5 }];
-            } else if (hour >= 9 && hour < 18) {
-                // Día
-                colors = ['#1565a8', '#7ec8e8'];
-                const sunAngle = ((hour - 9) / 9) * Math.PI;
-                sunX = width * 0.5 + Math.cos(sunAngle - Math.PI / 2) * width * 0.4;
-                sunY = height * 0.5 + Math.sin(sunAngle - Math.PI / 2) * height * 0.3;
-                sunRadius = 40;
-                // Nubes
-                clouds = [
-                    { x: width * 0.1, y: height * 0.2, speed: 1 },
-                    { x: width * 0.6, y: height * 0.4, speed: 0.8 },
-                    { x: width * 0.3, y: height * 0.6, speed: 1.2 }
-                ];
-            } else if (hour >= 18 && hour < 21) {
-                // Atardecer
-                const progress = (hour - 18 + minute / 60) / 3;
-                const r1 = Math.floor(45 + (45 - 45) * progress);
-                const g1 = Math.floor(16 + (96 - 16) * progress);
-                const b1 = Math.floor(96 + (96 - 96) * progress);
-                const r2 = Math.floor(232 + (232 - 232) * progress);
-                const g2 = Math.floor(100 + (100 - 100) * progress);
-                const b2 = Math.floor(58 + (58 - 58) * progress);
-                colors = [`rgb(${r1}, ${g1}, ${b1})`, `rgb(${r2}, ${g2}, ${b2})`];
-                sunX = width * 0.5;
-                sunY = height * (0.2 + progress * 0.6);
-                sunRadius = 35;
-                // Nubes teñidas
-                clouds = [{ x: width * 0.4, y: height * 0.3, speed: 0.7 }];
-            } else {
-                // Noche cerrada
-                colors = ['#080820', '#1e3a6e'];
-                // Muchas estrellas
-                for (let i = 0; i < 100; i++) {
-                    ctx.fillStyle = `rgba(255, 255, 255, ${0.3 + Math.sin(Date.now() * 0.001 + i) * 0.2})`;
-                    ctx.beginPath();
-                    ctx.arc(Math.random() * width, Math.random() * height * 0.8, 0.5, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                // Luna
-                ctx.fillStyle = '#e8e8e8';
-                ctx.beginPath();
-                ctx.arc(width * 0.7, height * 0.15, 25, 0, Math.PI * 2);
-                ctx.fill();
+        function getSkyImage(hour, weathercode) {
+            if (hour >= 0 && hour < 6) return IMAGE_URLS.night;
+            if (hour >= 6 && hour < 9) return IMAGE_URLS.dawn;
+            if (hour >= 9 && hour < 18) {
+                return weathercode >= 2 ? IMAGE_URLS.dayCloudy : IMAGE_URLS.dayClear;
             }
+            if (hour >= 18 && hour < 21) return IMAGE_URLS.sunset;
+            return IMAGE_URLS.nightDeep;
+        }
 
-            // Gradiente
-            const gradient = ctx.createLinearGradient(0, 0, 0, height);
-            gradient.addColorStop(0, colors[0]);
-            gradient.addColorStop(1, colors[1]);
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, width, height);
-
-            // Sol
-            if (sunX !== undefined) {
-                const sunGradient = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunRadius);
-                sunGradient.addColorStop(0, 'rgba(255, 255, 0, 0.8)');
-                sunGradient.addColorStop(1, 'rgba(255, 165, 0, 0.4)');
-                ctx.fillStyle = sunGradient;
-                ctx.beginPath();
-                ctx.arc(sunX, sunY, sunRadius, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            // Nubes
-            clouds.forEach(cloud => {
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-                ctx.beginPath();
-                ctx.arc(cloud.x, cloud.y, 20, 0, Math.PI * 2);
-                ctx.arc(cloud.x + 15, cloud.y, 25, 0, Math.PI * 2);
-                ctx.arc(cloud.x + 30, cloud.y, 20, 0, Math.PI * 2);
-                ctx.fill();
-                cloud.x += cloud.speed;
-                if (cloud.x > width + 50) cloud.x = -50;
-            });
+        function setSkyPhoto(imgElement, url) {
+            if (imgElement.dataset.src === url) return;
+            imgElement.dataset.src = url;
+            imgElement.classList.remove('show');
+            const tempImg = new Image();
+            tempImg.onload = () => {
+                imgElement.src = url;
+                requestAnimationFrame(() => imgElement.classList.add('show'));
+            };
+            tempImg.src = url;
         }
 
         function updateTimes() {
-            const now = new Date();
-
-            // Mar: detectar offset
-            const marFormatter = new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid' });
-            const marTime = new Date(marFormatter.format(now));
-            const marHour = marTime.getHours();
-            const marMinute = marTime.getMinutes();
-            const marSecond = marTime.getSeconds();
+            const { hour: marHour, minute: marMinute, second: marSecond } = getZoneTime('Europe/Madrid');
 
             document.getElementById('mar-time').textContent = `${marHour.toString().padStart(2, '0')}:${marMinute.toString().padStart(2, '0')}:${marSecond.toString().padStart(2, '0')}`;
             document.getElementById('mar-badge').textContent = getTimePeriod(marHour);
-            drawSky(marCtx, marHour, marMinute);
+            setSkyPhoto(marPhoto, getSkyImage(marHour, marWeathercode));
 
-            // Franco: UTC-3
-            const francoTime = new Date(now.getTime() - 3 * 60 * 60 * 1000);
+            const francoTime = getLocalTime(-3);
             const francoHour = francoTime.getHours();
             const francoMinute = francoTime.getMinutes();
             const francoSecond = francoTime.getSeconds();
 
             document.getElementById('franco-time').textContent = `${francoHour.toString().padStart(2, '0')}:${francoMinute.toString().padStart(2, '0')}:${francoSecond.toString().padStart(2, '0')}`;
             document.getElementById('franco-badge').textContent = getTimePeriod(francoHour);
-            drawSky(francoCtx, francoHour, francoMinute);
+            setSkyPhoto(francoPhoto, getSkyImage(francoHour, francoWeathercode));
         }
 
         async function updateWeather() {
@@ -1144,8 +1374,12 @@
                 const marData = await marResponse.json();
                 const francoData = await francoResponse.json();
 
-                document.getElementById('mar-weather').textContent = `${marData.current_weather.temperature}°C - ${WEATHER_CODES[marData.current_weather.weathercode] || 'Desconocido'}`;
-                document.getElementById('franco-weather').textContent = `${francoData.current_weather.temperature}°C - ${WEATHER_CODES[francoData.current_weather.weathercode] || 'Desconocido'}`;
+                marWeathercode = marData.current_weather.weathercode;
+                francoWeathercode = francoData.current_weather.weathercode;
+
+                document.getElementById('mar-weather').textContent = `${marData.current_weather.temperature}°C - ${WEATHER_CODES[marWeathercode] || 'Desconocido'}`;
+                document.getElementById('franco-weather').textContent = `${francoData.current_weather.temperature}°C - ${WEATHER_CODES[francoWeathercode] || 'Desconocido'}`;
+                updateTimes();
             } catch (error) {
                 console.error('Error fetching weather:', error);
                 document.getElementById('mar-weather').textContent = 'Clima no disponible (abre desde servidor)';
@@ -1356,6 +1590,161 @@
             }
         }
 
+        /* === CANCIONES === */
+        let songs = JSON.parse(localStorage.getItem('savedSongs')) || [];
+        let selectedSong = { title: '', artist: '', artwork: '', preview: '' };
+        const searchResultsEl = document.getElementById('search-results');
+        const songQueryEl = document.getElementById('song-query');
+        const songTitleEl = document.getElementById('song-title');
+        const songArtistEl = document.getElementById('song-artist');
+        const songWhoEl = document.getElementById('song-who');
+        const songDateEl = document.getElementById('song-date');
+        const songNoteEl = document.getElementById('song-note');
+        const savedSongsEl = document.getElementById('saved-songs');
+        let searchTimeout;
+
+        function formatDate(date) {
+            return new Date(date).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }
+
+        function renderSearchResults(results) {
+            searchResultsEl.innerHTML = '';
+            results.forEach(item => {
+                const artUrl = item.album?.cover_medium || item.artist?.picture_medium || '';
+                const title = item.title || item.trackName || 'Canción';
+                const artist = item.artist?.name || item.artistName || 'Artista';
+                const resultCard = document.createElement('div');
+                resultCard.className = 'result-card';
+                resultCard.innerHTML = `
+                    <img src="${artUrl}" alt="${title}">
+                    <div class="result-details">
+                        <div class="result-title">${title}</div>
+                        <div class="result-artist">${artist}</div>
+                        <button type="button">Elegir esta</button>
+                    </div>
+                `;
+                resultCard.querySelector('button').addEventListener('click', () => {
+                    chooseSong(item);
+                });
+                searchResultsEl.appendChild(resultCard);
+            });
+        }
+
+        function chooseSong(item) {
+            selectedSong = {
+                title: item.title || item.trackName,
+                artist: item.artist?.name || item.artistName,
+                artwork: item.album?.cover_medium || item.artworkUrl60 || '',
+                preview: item.preview || item.previewUrl || ''
+            };
+            songTitleEl.value = selectedSong.title;
+            songArtistEl.value = selectedSong.artist;
+        }
+
+        window.deezerCallback = function(data) {
+            const script = document.getElementById('deezer-jsonp');
+            if (script) script.remove();
+            if (!data || !data.data) {
+                searchResultsEl.innerHTML = '<div class="search-empty">No se encontraron canciones.</div>';
+                return;
+            }
+            renderSearchResults(data.data);
+        };
+
+        function loadTrendingSongs() {
+            const existing = document.getElementById('deezer-jsonp');
+            if (existing) existing.remove();
+            const script = document.createElement('script');
+            script.id = 'deezer-jsonp';
+            script.src = 'https://api.deezer.com/chart/0/tracks?output=jsonp&callback=deezerCallback';
+            document.body.appendChild(script);
+        }
+
+        function searchSongs() {
+            const query = songQueryEl.value.trim();
+            const existing = document.getElementById('deezer-jsonp');
+            if (existing) existing.remove();
+            if (!query) {
+                loadTrendingSongs();
+                return;
+            }
+            const encoded = encodeURIComponent(query);
+            const script = document.createElement('script');
+            script.id = 'deezer-jsonp';
+            script.src = `https://api.deezer.com/search?q=${encoded}&output=jsonp&callback=deezerCallback`;
+            document.body.appendChild(script);
+        }
+
+        function updateSongs() {
+            savedSongsEl.innerHTML = '';
+            songs.sort((a, b) => new Date(b.date) - new Date(a.date));
+            songs.forEach((song, index) => {
+                const card = document.createElement('div');
+                card.className = 'saved-song';
+                card.innerHTML = `
+                    <img src="${song.artwork}" alt="${song.title}">
+                    <div class="saved-song-info">
+                        <div class="saved-song-title">${song.title}</div>
+                        <div class="saved-song-artist">${song.artist}</div>
+                        <div class="saved-song-date">${formatDate(song.date)}</div>
+                        <div class="saved-song-note">${song.note || ''}</div>
+                        <span class="song-badge">${song.who}</span>
+                    </div>
+                    <div class="song-actions">
+                        <button type="button" data-index="${index}" class="play-btn">Play</button>
+                        <button type="button" data-index="${index}" class="delete-song">×</button>
+                        <audio src="${song.preview}" preload="none"></audio>
+                    </div>
+                `;
+                const playBtn = card.querySelector('.play-btn');
+                const audio = card.querySelector('audio');
+                const deleteBtn = card.querySelector('.delete-song');
+                playBtn.addEventListener('click', () => {
+                    if (audio.paused) {
+                        document.querySelectorAll('audio').forEach(a => { if (a !== audio) a.pause(); });
+                        audio.play();
+                        playBtn.textContent = 'Pause';
+                    } else {
+                        audio.pause();
+                        playBtn.textContent = 'Play';
+                    }
+                });
+                audio.addEventListener('ended', () => {
+                    playBtn.textContent = 'Play';
+                });
+                deleteBtn.addEventListener('click', () => deleteSong(index));
+                savedSongsEl.appendChild(card);
+            });
+        }
+
+        function saveSong() {
+            if (!songTitleEl.value.trim() || !songArtistEl.value.trim() || !selectedSong.preview) return;
+            const entry = {
+                title: songTitleEl.value.trim(),
+                artist: songArtistEl.value.trim(),
+                artwork: selectedSong.artwork,
+                preview: selectedSong.preview,
+                who: songWhoEl.value,
+                date: songDateEl.value || new Date().toISOString().slice(0, 10),
+                note: songNoteEl.value.trim()
+            };
+            songs.unshift(entry);
+            localStorage.setItem('savedSongs', JSON.stringify(songs));
+            songQueryEl.value = '';
+            songTitleEl.value = '';
+            songArtistEl.value = '';
+            songNoteEl.value = '';
+            searchResultsEl.innerHTML = '';
+            selectedSong = { title: '', artist: '', artwork: '', preview: '' };
+            updateSongs();
+        }
+
+        function deleteSong(index) {
+            songs.splice(index, 1);
+            localStorage.setItem('savedSongs', JSON.stringify(songs));
+            updateSongs();
+        }
+
         /* === RECORDATORIOS === */
         let reminders = JSON.parse(localStorage.getItem('reminders')) || [
             { date: '2026-09-05', desc: 'Aniversario' },
@@ -1422,7 +1811,6 @@
         /* === INICIALIZACIÓN === */
         window.addEventListener('load', () => {
             resizeBgCanvas();
-            resizeSkyCanvases();
             animateBg();
             updateTimes();
             updateWeather();
@@ -1444,6 +1832,15 @@
                 if (e.key === 'Enter') addMessage();
             });
             document.getElementById('add-reminder-btn').addEventListener('click', addReminder);
+            songQueryEl.addEventListener('input', () => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(searchSongs, 400);
+            });
+            document.getElementById('save-song-btn').addEventListener('click', saveSong);
+            songDateEl.value = new Date().toISOString().slice(0, 10);
+            songWhoEl.value = 'Mar';
+            updateSongs();
+            loadTrendingSongs();
 
             // Actualizaciones periódicas
             setInterval(updateTimes, 1000);
@@ -1453,7 +1850,6 @@
 
         window.addEventListener('resize', () => {
             resizeBgCanvas();
-            resizeSkyCanvases();
         });
     </script>
 </body>
