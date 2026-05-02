@@ -15,9 +15,6 @@
         nav .logo { font-family: "Cormorant Garamond", serif; font-size: 24px; color: #c9a96e; }
         nav .web-link { font-size: 12px; color: #b0a176; text-decoration: none; margin-left: 1rem; }
         nav .web-link:hover { color: #c9a96e; }
-        nav .nav-links { display: flex; gap: 2rem; flex-wrap: wrap; }
-        nav a { color: #b0a176; text-decoration: none; transition: color 300ms; font-size: 14px; }
-        nav a:hover { color: #c9a96e; }
         .container { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr; gap: 4rem; }
         section { background-color: #141428; border: 0.5px solid rgba(201, 169, 110, 0.18); border-radius: 20px; padding: 2rem; transition: all 300ms; }
         section:hover { border-color: rgba(201, 169, 110, 0.3); }
@@ -86,30 +83,542 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
                 <div>
                     <h3 style="color: #d4c88f; margin-bottom: 1rem;">🌍 Mar - Granada</h3>
-                    <div style="height: 250px; border-radius: 16px; background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%); overflow: hidden;"><img id="mar-photo" src="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;"></div>
-                    <div style="margin-top: 1rem; text-align: center;"><div id="mar-time" style="font-size: 24px; color: #c9a96e; font-weight: bold;">00:00:00</div><div id="mar-badge" style="color: #8b7355; font-size: 12px;">-</div></div>
+                    <div style="height: 250px; border-radius: 16px; background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%); overflow: hidden;">
+                        <img id="mar-photo" src="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">
+                    </div>
+                    <div style="margin-top: 1rem; text-align: center;">
+                        <div id="mar-time" style="font-size: 24px; color: #c9a96e; font-weight: bold;">00:00:00</div>
+                        <div id="mar-badge" style="color: #8b7355; font-size: 12px;">-</div>
+                    </div>
                 </div>
                 <div>
                     <h3 style="color: #d4c88f; margin-bottom: 1rem;">🌎 Franco - Buenos Aires</h3>
-                    <div style="height: 250px; border-radius: 16px; background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%); overflow: hidden;"><img id="franco-photo" src="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;"></div>
-                    <div style="margin-top: 1rem; text-align: center;"><div id="franco-time" style="font-size: 24px; color: #c9a96e; font-weight: bold;">00:00:00</div><div id="franco-badge" style="color: #8b7355; font-size: 12px;">-</div></div>
+                    <div style="height: 250px; border-radius: 16px; background: linear-gradient(135deg, #1a1a3e 0%, #2a2a5e 100%); overflow: hidden;">
+                        <img id="franco-photo" src="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">
+                    </div>
+                    <div style="margin-top: 1rem; text-align: center;">
+                        <div id="franco-time" style="font-size: 24px; color: #c9a96e; font-weight: bold;">00:00:00</div>
+                        <div id="franco-badge" style="color: #8b7355; font-size: 12px;">-</div>
+                    </div>
                 </div>
             </div>
         </section>
         <section id="miss">
             <h2>💕 Te Echo de Menos</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;"><div><h3 style="color: #d4c88f; margin-bottom: 1rem;">De Mar</h3><div style="font-size: 64px; color: #c9a96e; text-align: center; padding: 2rem; background-color: #1c1c35; border-radius: 12px; font-weight: bold;" id="mar-miss">0</div><button onclick="addMiss('mar')" style="width: 100%; margin-top: 1rem;">+1 Te echo de menos</button></div><div><h3 style="color: #d4c88f; margin-bottom: 1rem;">De Franco</h3><div style="font-size: 64px; color: #c9a96e; text-align: center; padding: 2rem; background-color: #1c1c35; border-radius: 12px; font-weight: bold;" id="franco-miss">0</div><button onclick="addMiss('franco')" style="width: 100%; margin-top: 1rem;">+1 Te echo de menos</button></div></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h3 style="color: #d4c88f; margin-bottom: 1rem;">De Mar</h3>
+                    <div style="font-size: 64px; color: #c9a96e; text-align: center; padding: 2rem; background-color: #1c1c35; border-radius: 12px; font-weight: bold;" id="mar-miss">0</div>
+                    <button onclick="addMiss('mar')" style="width: 100%; margin-top: 1rem;">+1 Te echo de menos</button>
+                </div>
+                <div>
+                    <h3 style="color: #d4c88f; margin-bottom: 1rem;">De Franco</h3>
+                    <div style="font-size: 64px; color: #c9a96e; text-align: center; padding: 2rem; background-color: #1c1c35; border-radius: 12px; font-weight: bold;" id="franco-miss">0</div>
+                    <button onclick="addMiss('franco')" style="width: 100%; margin-top: 1rem;">+1 Te echo de menos</button>
+                </div>
+            </div>
         </section>
-        <section id="movies"><h2>🎬 Películas & Series</h2><div style="margin-bottom: 2rem; display: grid; gap: 1rem;"><h3 style="color: #d4c88f;">Agregar Película/Serie</h3><input type="text" id="title" placeholder="Título"><input type="text" id="poster" placeholder="URL de la portada (imagen)"><div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;"><select id="type" style="margin: 0;"><option value="movie">🎬 Película</option><option value="series">📺 Serie</option></select><select id="status" style="margin: 0;"><option value="pending">⏳ Pendiente</option><option value="watched">✅ Vista</option></select></div><input type="number" id="rating" placeholder="Puntuación (0-10)" min="0" max="10" step="0.5"><button onclick="addMovie()">Agregar</button></div><h3 style="color: #d4c88f; margin-bottom: 1rem;">⏳ Pendientes</h3><div class="movie-grid" id="pending-movies" style="min-height: 100px;"></div><h3 style="color: #d4c88f; margin: 2rem 0 1rem 0;">✅ Vistas</h3><div class="movie-grid" id="watched-movies" style="min-height: 100px;"></div></section>
-        <section id="chat"><h2>💬 Chat Privado</h2><div style="margin-bottom: 1rem;"><label style="color: #d4c88f; font-weight: 500;">¿Quién eres?</label><select id="sender" style="margin: 0.5rem 0;"><option value="Mar">🌍 Mar</option><option value="Franco">🌎 Franco</option></select></div><div class="chat-box"><div class="chat-messages" id="chat-messages"></div><div class="chat-input"><input type="text" id="chat-input" placeholder="Escribe un mensaje..."><button onclick="sendMessage()">Enviar</button></div></div></section>
-        <section id="tasks"><h2>📋 TODO List</h2><div style="margin-bottom: 1rem; display: grid; gap: 0.5rem;"><input type="text" id="task-input" placeholder="Nueva tarea..."><button onclick="addTask()">Agregar Tarea</button></div><div class="tasks-list" id="tasks-list"></div></section>
-        <section id="fights"><h2>💔 Contador de Peleas</h2><p style="color: #8b7355; text-align: center; margin-bottom: 1rem;">Se reinicia automáticamente a las 12:00 AM</p><div class="counter-display"><div style="font-size: 18px; color: #d4c88f;">Peleas hoy</div><div class="counter-number" id="fight-count">0</div><button onclick="addFight()" class="counter-button">➕ +1 Pelea</button><button onclick="resetFights()" class="counter-button" style="background-color: transparent; border-color: #d2c090; color: #d2c090;">🔄 Reiniciar</button></div></section>
-        <section id="songs"><h2>🎵 Canciones que me recuerdan a ti</h2><div style="margin-bottom: 1.5rem;"><input type="text" id="song-query" placeholder="Busca una canción o déjalo vacío para novedades"><div style="font-size: 13px; color: #b0a176; line-height: 1.4; margin: 0.5rem 0;">Canciones actualizadas automáticamente del día</div><div id="search-results" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.75rem; margin-bottom: 1rem;"></div></div><div style="margin-bottom: 1.5rem; display: grid; gap: 0.75rem;"><h3 style="color: #d4c88f;">Guardar Canción</h3><input type="text" id="song-title" placeholder="Título" readonly><input type="text" id="song-artist" placeholder="Artista" readonly><div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;"><select id="song-who" style="margin: 0;"><option value="Mar">🌍 Mar</option><option value="Franco">🌎 Franco</option></select><input type="date" id="song-date" style="margin: 0;"></div><textarea id="song-note" placeholder="¿Por qué te recuerda a ti? (120 caracteres)" maxlength="120" style="min-height: 80px;"></textarea><button onclick="saveSong()">💾 Guardar Canción</button></div><h3 style="color: #d4c88f; margin-bottom: 1rem;">Canciones Guardadas</h3><div id="saved-songs" style="display: grid; gap: 1rem;"></div></section>
+        <section id="movies">
+            <h2>🎬 Películas & Series</h2>
+            <div style="margin-bottom: 2rem; display: grid; gap: 1rem;">
+                <h3 style="color: #d4c88f;">Agregar Película/Serie</h3>
+                <input type="text" id="title" placeholder="Título">
+                <input type="text" id="poster" placeholder="URL de la portada (imagen)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <select id="type" style="margin: 0;">
+                        <option value="movie">🎬 Película</option>
+                        <option value="series">📺 Serie</option>
+                    </select>
+                    <select id="status" style="margin: 0;">
+                        <option value="pending">⏳ Pendiente</option>
+                        <option value="watched">✅ Vista</option>
+                    </select>
+                </div>
+                <input type="number" id="rating" placeholder="Puntuación (0-10)" min="0" max="10" step="0.5">
+                <button onclick="addMovie()">Agregar</button>
+            </div>
+            <h3 style="color: #d4c88f; margin-bottom: 1rem;">⏳ Pendientes</h3>
+            <div class="movie-grid" id="pending-movies" style="min-height: 100px;"></div>
+            <h3 style="color: #d4c88f; margin: 2rem 0 1rem 0;">✅ Vistas</h3>
+            <div class="movie-grid" id="watched-movies" style="min-height: 100px;"></div>
+        </section>
+        <section id="chat">
+            <h2>💬 Chat Privado</h2>
+            <div style="margin-bottom: 1rem;">
+                <label style="color: #d4c88f; font-weight: 500;">¿Quién eres?</label>
+                <select id="sender" style="margin: 0.5rem 0;">
+                    <option value="Mar">🌍 Mar</option>
+                    <option value="Franco">🌎 Franco</option>
+                </select>
+            </div>
+            <div class="chat-box">
+                <div class="chat-messages" id="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Escribe un mensaje...">
+                    <button onclick="sendMessage()">Enviar</button>
+                </div>
+            </div>
+        </section>
+        <section id="tasks">
+            <h2>📋 TODO List</h2>
+            <div style="margin-bottom: 1rem; display: grid; gap: 0.5rem;">
+                <input type="text" id="task-input" placeholder="Nueva tarea...">
+                <button onclick="addTask()">Agregar Tarea</button>
+            </div>
+            <div class="tasks-list" id="tasks-list"></div>
+        </section>
+        <section id="fights">
+            <h2>💔 Contador de Peleas</h2>
+            <p style="color: #8b7355; text-align: center; margin-bottom: 1rem;">Se reinicia automáticamente a las 12:00 AM</p>
+            <div class="counter-display">
+                <div style="font-size: 18px; color: #d4c88f;">Peleas hoy</div>
+                <div class="counter-number" id="fight-count">0</div>
+                <button onclick="addFight()" class="counter-button">➕ +1 Pelea</button>
+                <button onclick="resetFights()" class="counter-button" style="background-color: transparent; border-color: #d2c090; color: #d2c090;">🔄 Reiniciar</button>
+            </div>
+        </section>
+        <section id="songs">
+            <h2>🎵 Canciones que me recuerdan a ti</h2>
+            <div style="margin-bottom: 1.5rem;">
+                <input type="text" id="song-query" placeholder="Busca una canción o déjalo vacío para novedades">
+                <div style="font-size: 13px; color: #b0a176; line-height: 1.4; margin: 0.5rem 0;">Canciones actualizadas automáticamente del día</div>
+                <div id="search-results" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.75rem; margin-bottom: 1rem;"></div>
+            </div>
+            <div style="margin-bottom: 1.5rem; display: grid; gap: 0.75rem;">
+                <h3 style="color: #d4c88f;">Guardar Canción</h3>
+                <input type="text" id="song-title" placeholder="Título" readonly>
+                <input type="text" id="song-artist" placeholder="Artista" readonly>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                    <select id="song-who" style="margin: 0;">
+                        <option value="Mar">🌍 Mar</option>
+                        <option value="Franco">🌎 Franco</option>
+                    </select>
+                    <input type="date" id="song-date" style="margin: 0;">
+                </div>
+                <textarea id="song-note" placeholder="¿Por qué te recuerda a ti? (120 caracteres)" maxlength="120" style="min-height: 80px;"></textarea>
+                <button onclick="saveSong()">💾 Guardar Canción</button>
+            </div>
+            <h3 style="color: #d4c88f; margin-bottom: 1rem;">Canciones Guardadas</h3>
+            <div id="saved-songs" style="display: grid; gap: 1rem;"></div>
+        </section>
     </div>
+
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js"></script>
     <script>
-const firebaseConfig={apiKey:"AIzaSyDETAFMbMneTe4uXT6s4n7XbjP2odf3yq8",authDomain:"realus-3e077.firebaseapp.com",projectId:"realus-3e077",storageBucket:"realus-3e077.firebasestorage.app",messagingSenderId:"916733697356",appId:"1:916733697356:web:9bab8bd6b2bd2b036503e9",databaseURL:"https://realus-3e077-default-rtdb.europe-west1.firebasedatabase.app"};const app=firebase.initializeApp(firebaseConfig);const db=firebase.database(app);const IMAGE_URLS={night:'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80',dawn:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80',dayClear:'https://images.unsplash.com/photo-1601297183305-6df142704ea2?w=800&q=80',dayCloudy:'https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=800&q=80',sunset:'https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=800&q=80'};let selectedSong={title:'',artist:'',artwork:'',preview:''};const canvas=document.getElementById('background-canvas');const ctx=canvas.getContext('2d');function resizeBgCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}function drawBg(){ctx.fillStyle='rgba(7, 7, 26, 0.05)';ctx.fillRect(0,0,canvas.width,canvas.height);}function animateBg(){drawBg();requestAnimationFrame(animateBg);}function getZoneTime(timeZone){const now=new Date();const parts=new Intl.DateTimeFormat('en-US',{timeZone,hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(now);const values={};parts.forEach(part=>{if(part.type!=='literal')values[part.type]=part.value;});return{hour:Number(values.hour),minute:Number(values.minute),second:Number(values.second)};}function getTimePeriod(hour){if(hour>=0&&hour<6)return'Noche 🌙';if(hour>=6&&hour<9)return'Amanecer 🌅';if(hour>=9&&hour<18)return'Día ☀️';if(hour>=18&&hour<21)return'Atardecer 🌅';return'Noche 🌙';}function getSkyImage(hour){if(hour>=0&&hour<6)return IMAGE_URLS.night;if(hour>=6&&hour<9)return IMAGE_URLS.dawn;if(hour>=9&&hour<18)return IMAGE_URLS.dayClear;if(hour>=18&&hour<21)return IMAGE_URLS.sunset;return IMAGE_URLS.night;}function updateTimes(){const{hour:marHour,minute:marMinute,second:marSecond}=getZoneTime('Europe/Madrid');document.getElementById('mar-time').textContent=`${marHour.toString().padStart(2,'0')}:${marMinute.toString().padStart(2,'0')}:${marSecond.toString().padStart(2,'0')}`;document.getElementById('mar-badge').textContent=getTimePeriod(marHour);document.getElementById('mar-photo').src=getSkyImage(marHour);const{hour:francoHour,minute:francoMinute,second:francoSecond}=getZoneTime('America/Argentina/Buenos_Aires');document.getElementById('franco-time').textContent=`${francoHour.toString().padStart(2,'0')}:${francoMinute.toString().padStart(2,'0')}:${francoSecond.toString().padStart(2,'0')}`;document.getElementById('franco-badge').textContent=getTimePeriod(francoHour);document.getElementById('franco-photo').src=getSkyImage(francoHour);}function addMiss(person){db.ref(`miss/${person}`).transaction(current=>(current||0)+1);}db.ref('miss').on('value',snap=>{const data=snap.val()||{};document.getElementById('mar-miss').textContent=data.mar||0;document.getElementById('franco-miss').textContent=data.franco||0;});function addMovie(){const title=document.getElementById('title').value.trim();const poster=document.getElementById('poster').value.trim();const type=document.getElementById('type').value;const status=document.getElementById('status').value;const rating=parseFloat(document.getElementById('rating').value)||0;if(!title||!poster){alert('⚠️ Por favor completa título y URL de poster');return;}const movie={title,poster,type,rating,date:new Date().toISOString()};db.ref(`movies/${status}`).push(movie);document.getElementById('title').value='';document.getElementById('poster').value='';document.getElementById('rating').value='';}db.ref('movies').on('value',snap=>{const data=snap.val()||{};const pending=data.pending||{};const watched=data.watched||{};document.getElementById('pending-movies').innerHTML='';Object.entries(pending).forEach(([key,movie])=>{const card=document.createElement('div');card.className='movie-card';card.innerHTML=`<img src="${movie.poster}" alt="${movie.title}" onerror="this.src='https://via.placeholder.com/140x180?text=No+Poster'"><div class="movie-info"><div class="movie-title">${movie.title}</div><div class="movie-rating">${movie.type==='series'?'📺':'🎬'}</div><button onclick="markWatched('${key}',true)" style="width: 100%; padding: 0.4rem; margin-top: 0.5rem; font-size: 10px;">✓ Vista</button></div>`;document.getElementById('pending-movies').appendChild(card);});document.getElementById('watched-movies').innerHTML='';Object.entries(watched).forEach(([key,movie])=>{const card=document.createElement('div');card.className='movie-card';card.innerHTML=`<img src="${movie.poster}" alt="${movie.title}" onerror="this.src='https://via.placeholder.com/140x180?text=No+Poster'"><div class="movie-info"><div class="movie-title">${movie.title}</div><div class="movie-rating">⭐ ${movie.rating}/10</div><div class="movie-badge">✅ Vista</div></div>`;document.getElementById('watched-movies').appendChild(card);});});function markWatched(key){db.ref(`movies/pending/${key}`).once('value').then(snap=>{if(snap.exists()){const movie=snap.val();db.ref(`movies/watched/${key}`).set(movie);db.ref(`movies/pending/${key}`).remove();}});}function sendMessage(){const sender=document.getElementById('sender').value;const text=document.getElementById('chat-input').value.trim();if(!text)return;db.ref('chat/messages').push({from:sender,text,timestamp:new Date().toISOString()});document.getElementById('chat-input').value='';}db.ref('chat/messages').on('value',snap=>{const data=snap.val()||{};const messagesDiv=document.getElementById('chat-messages');messagesDiv.innerHTML='';Object.values(data).sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp)).forEach(msg=>{const msgEl=document.createElement('div');msgEl.className=`chat-message ${msg.from==='Mar'?'me':'other'}`;const time=new Date(msg.timestamp).toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});msgEl.innerHTML=`<div>${msg.text}</div><small>${msg.from} • ${time}</small>`;messagesDiv.appendChild(msgEl);});messagesDiv.scrollTop=messagesDiv.scrollHeight;});function addTask(){const text=document.getElementById('task-input').value.trim();if(!text)return;db.ref('tasks').push({text,completed:false,date:new Date().toISOString()});document.getElementById('task-input').value='';}db.ref('tasks').on('value',snap=>{const data=snap.val()||{};const tasksDiv=document.getElementById('tasks-list');tasksDiv.innerHTML='';Object.entries(data).forEach(([key,task])=>{const taskEl=document.createElement('div');taskEl.className=`task-item ${task.completed?'completed':''}`;taskEl.innerHTML=`<input type="checkbox" ${task.completed?'checked':''} onchange="toggleTask('${key}',this.checked)"><span>${task.text}</span><span class="task-delete" onclick="deleteTask('${key}')">×</span>`;tasksDiv.appendChild(taskEl);});});function toggleTask(key,completed){db.ref(`tasks/${key}/completed`).set(completed);}function deleteTask(key){db.ref(`tasks/${key}`).remove();}function addFight(){db.ref('fights/today').transaction(current=>(current||0)+1);}function resetFights(){db.ref('fights/today').set(0);}db.ref('fights/today').on('value',snap=>{document.getElementById('fight-count').textContent=snap.val()||0;});function checkDailyReset(){const now=new Date();now.setHours(0,0,0,0);db.ref('fights/lastReset').once('value').then(snap=>{const last=snap.val()?new Date(snap.val()):null;if(!last||new Date(last)<now){db.ref('fights/today').set(0);db.ref('fights/lastReset').set(now.toISOString());}});}setInterval(()=>{const now=new Date();if(now.getHours()===0&&now.getMinutes()===0){checkDailyReset();}},60000);window.deezerCallback=function(data){const script=document.getElementById('deezer-jsonp');if(script)script.remove();if(!data||!data.data){document.getElementById('search-results').innerHTML='';return;}renderSearchResults(data.data);};function renderSearchResults(results){const resultsDiv=document.getElementById('search-results');resultsDiv.innerHTML='';results.slice(0,20).forEach(item=>{const artUrl=item.album?.cover_medium||'';const title=item.title||'Canción';const artist=item.artist?.name||'Artista';const resultCard=document.createElement('div');resultCard.className='movie-card';resultCard.style.cursor='pointer';resultCard.innerHTML=`<img src="${artUrl}" alt="${title}" style="width: 100%; height: 120px; object-fit: cover;"><div class="movie-info"><div class="movie-title" style="font-size: 11px;">${title}</div><div class="movie-rating" style="font-size: 10px;">${artist}</div><button onclick="chooseSong('${title.replace(/'/g,"\'")}', '${artist.replace(/'/g,"\'")}', '${artUrl.replace(/'/g,"\'")}', '${item.preview?item.preview.replace(/'/g,"\'"):''}')" style="width: 100%; padding: 0.3rem; margin: 0.5rem 0 0 0; font-size: 9px;">Elegir</button></div>`;resultsDiv.appendChild(resultCard);});};function searchSongs(){const query=document.getElementById('song-query').value.trim();const existing=document.getElementById('deezer-jsonp');if(existing)existing.remove();if(!query){const script=document.createElement('script');script.id='deezer-jsonp';script.src='https://api.deezer.com/chart/0/tracks?output=jsonp&limit=20&callback=deezerCallback';document.body.appendChild(script);return;}const encoded=encodeURIComponent(query);const script=document.createElement('script');script.id='deezer-jsonp';script.src=`https://api.deezer.com/search?q=${encoded}&output=jsonp&limit=20&callback=deezerCallback`;document.body.appendChild(script);}function chooseSong(title,artist,artwork,preview){selectedSong={title,artist,artwork,preview};document.getElementById('song-title').value=title;document.getElementById('song-artist').value=artist;}function saveSong(){const title=document.getElementById('song-title').value.trim();const artist=document.getElementById('song-artist').value.trim();const who=document.getElementById('song-who').value;const date=document.getElementById('song-date').value;const note=document.getElementById('song-note').value.trim();if(!title||!artist){alert('⚠️ Selecciona una canción primero');return;}db.ref('songs').push({title,artist,artwork:selectedSong.artwork,who,date:date||new Date().toISOString().slice(0,10),note,timestamp:new Date().toISOString()});document.getElementById('song-title').value='';document.getElementById('song-artist').value='';document.getElementById('song-note').value='';selectedSong={title:'',artist:'',artwork:'',preview:''};}db.ref('songs').on('value',snap=>{const data=snap.val()||{};const songsDiv=document.getElementById('saved-songs');songsDiv.innerHTML='';Object.entries(data).sort((a,b)=>new Date(b[1].timestamp)-new Date(a[1].timestamp)).forEach(([key,song])=>{const songCard=document.createElement('div');songCard.style.cssText='display: flex; gap: 1rem; padding: 1rem; background-color: #1c1c35; border-radius: 12px; border: 0.5px solid rgba(201, 169, 110, 0.18);';songCard.innerHTML=`<img src="${song.artwork}" alt="${song.title}" style="width: 60px; height: 60px; border-radius: 8px; object-fit: cover;"><div style="flex: 1;"><div style="color: #c9a96e; font-weight: 500; margin-bottom: 0.25rem;">${song.title}</div><div style="color: #8b7355; font-size: 12px;">${song.artist}</div><div style="color: #d4c88f; font-size: 11px; margin-top: 0.25rem;">${song.who==='Mar'?'🌍':'🌎'} ${song.who} • ${song.date}</div><div style="color: #b0a176; font-size: 12px; margin-top: 0.5rem; font-style: italic;">"${song.note}"</div></div>`;songsDiv.appendChild(songCard);});});window.addEventListener('load',()=>{resizeBgCanvas();animateBg();updateTimes();checkDailyReset();searchSongs();setInterval(updateTimes,1000);document.getElementById('song-query').addEventListener('input',()=>{clearTimeout(window.songSearchTimeout);window.songSearchTimeout=setTimeout(searchSongs,400);});document.getElementById('chat-input').addEventListener('keypress',(e)=>{if(e.key==='Enter')sendMessage();});document.getElementById('task-input').addEventListener('keypress',(e)=>{if(e.key==='Enter')addTask();});document.getElementById('song-date').value=new Date().toISOString().slice(0,10);});window.addEventListener('resize',resizeBgCanvas);
+        // ===== FIREBASE CONFIG =====
+        const firebaseConfig = {
+            apiKey: "AIzaSyDETAFMbMneTe4uXT6s4n7XbjP2odf3yq8",
+            authDomain: "realus-3e077.firebaseapp.com",
+            projectId: "realus-3e077",
+            storageBucket: "realus-3e077.firebasestorage.app",
+            messagingSenderId: "916733697356",
+            appId: "1:916733697356:web:9bab8bd6b2bd2b036503e9",
+            databaseURL: "https://realus-3e077-default-rtdb.europe-west1.firebasedatabase.app"
+        };
+
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.database(app);
+
+        // ===== CONSTANTES =====
+        const IMAGE_URLS = {
+            night: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80',
+            dawn: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80',
+            dayClear: 'https://images.unsplash.com/photo-1601297183305-6df142704ea2?w=800&q=80',
+            dayCloudy: 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=800&q=80',
+            sunset: 'https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=800&q=80'
+        };
+
+        let selectedSong = { title: '', artist: '', artwork: '', preview: '' };
+
+        // ===== CANVAS FONDO =====
+        const canvas = document.getElementById('background-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeBgCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function drawBg() {
+            ctx.fillStyle = 'rgba(7, 7, 26, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function animateBg() {
+            drawBg();
+            requestAnimationFrame(animateBg);
+        }
+
+        // ===== ZONAS HORARIAS =====
+        function getZoneTime(timeZone) {
+            const now = new Date();
+            const parts = new Intl.DateTimeFormat('en-US', {
+                timeZone,
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            }).formatToParts(now);
+            const values = {};
+            parts.forEach(part => {
+                if (part.type !== 'literal') values[part.type] = part.value;
+            });
+            return {
+                hour: Number(values.hour),
+                minute: Number(values.minute),
+                second: Number(values.second)
+            };
+        }
+
+        function getTimePeriod(hour) {
+            if (hour >= 0 && hour < 6) return 'Noche 🌙';
+            if (hour >= 6 && hour < 9) return 'Amanecer 🌅';
+            if (hour >= 9 && hour < 18) return 'Día ☀️';
+            if (hour >= 18 && hour < 21) return 'Atardecer 🌅';
+            return 'Noche 🌙';
+        }
+
+        function getSkyImage(hour) {
+            if (hour >= 0 && hour < 6) return IMAGE_URLS.night;
+            if (hour >= 6 && hour < 9) return IMAGE_URLS.dawn;
+            if (hour >= 9 && hour < 18) return IMAGE_URLS.dayClear;
+            if (hour >= 18 && hour < 21) return IMAGE_URLS.sunset;
+            return IMAGE_URLS.night;
+        }
+
+        function updateTimes() {
+            const { hour: marHour, minute: marMinute, second: marSecond } = getZoneTime('Europe/Madrid');
+            document.getElementById('mar-time').textContent = `${marHour.toString().padStart(2, '0')}:${marMinute.toString().padStart(2, '0')}:${marSecond.toString().padStart(2, '0')}`;
+            document.getElementById('mar-badge').textContent = getTimePeriod(marHour);
+            document.getElementById('mar-photo').src = getSkyImage(marHour);
+
+            const { hour: francoHour, minute: francoMinute, second: francoSecond } = getZoneTime('America/Argentina/Buenos_Aires');
+            document.getElementById('franco-time').textContent = `${francoHour.toString().padStart(2, '0')}:${francoMinute.toString().padStart(2, '0')}:${francoSecond.toString().padStart(2, '0')}`;
+            document.getElementById('franco-badge').textContent = getTimePeriod(francoHour);
+            document.getElementById('franco-photo').src = getSkyImage(francoHour);
+        }
+
+        // ===== ECHO DE MENOS =====
+        function addMiss(person) {
+            db.ref(`miss/${person}`).transaction(current => (current || 0) + 1);
+        }
+
+        db.ref('miss').on('value', snap => {
+            const data = snap.val() || {};
+            document.getElementById('mar-miss').textContent = data.mar || 0;
+            document.getElementById('franco-miss').textContent = data.franco || 0;
+        });
+
+        // ===== PELÍCULAS Y SERIES =====
+        function addMovie() {
+            const title = document.getElementById('title').value.trim();
+            const poster = document.getElementById('poster').value.trim();
+            const type = document.getElementById('type').value;
+            const status = document.getElementById('status').value;
+            const rating = parseFloat(document.getElementById('rating').value) || 0;
+
+            if (!title || !poster) {
+                alert('⚠️ Por favor completa título y URL de poster');
+                return;
+            }
+
+            const movie = { title, poster, type, rating, date: new Date().toISOString() };
+            db.ref(`movies/${status}`).push(movie);
+
+            document.getElementById('title').value = '';
+            document.getElementById('poster').value = '';
+            document.getElementById('rating').value = '';
+        }
+
+        db.ref('movies').on('value', snap => {
+            const data = snap.val() || {};
+            const pending = data.pending || {};
+            const watched = data.watched || {};
+
+            document.getElementById('pending-movies').innerHTML = '';
+            Object.entries(pending).forEach(([key, movie]) => {
+                const card = document.createElement('div');
+                card.className = 'movie-card';
+                card.innerHTML = `
+                    <img src="${movie.poster}" alt="${movie.title}" onerror="this.src='https://via.placeholder.com/140x180?text=No+Poster'">
+                    <div class="movie-info">
+                        <div class="movie-title">${movie.title}</div>
+                        <div class="movie-rating">${movie.type === 'series' ? '📺' : '🎬'}</div>
+                        <button onclick="markWatched('${key}', true)" style="width: 100%; padding: 0.4rem; margin-top: 0.5rem; font-size: 10px;">✓ Vista</button>
+                    </div>
+                `;
+                document.getElementById('pending-movies').appendChild(card);
+            });
+
+            document.getElementById('watched-movies').innerHTML = '';
+            Object.entries(watched).forEach(([key, movie]) => {
+                const card = document.createElement('div');
+                card.className = 'movie-card';
+                card.innerHTML = `
+                    <img src="${movie.poster}" alt="${movie.title}" onerror="this.src='https://via.placeholder.com/140x180?text=No+Poster'">
+                    <div class="movie-info">
+                        <div class="movie-title">${movie.title}</div>
+                        <div class="movie-rating">⭐ ${movie.rating}/10</div>
+                        <div class="movie-badge">✅ Vista</div>
+                    </div>
+                `;
+                document.getElementById('watched-movies').appendChild(card);
+            });
+        });
+
+        function markWatched(key) {
+            db.ref(`movies/pending/${key}`).once('value').then(snap => {
+                if (snap.exists()) {
+                    const movie = snap.val();
+                    db.ref(`movies/watched/${key}`).set(movie);
+                    db.ref(`movies/pending/${key}`).remove();
+                }
+            });
+        }
+
+        // ===== CHAT =====
+        function sendMessage() {
+            const sender = document.getElementById('sender').value;
+            const text = document.getElementById('chat-input').value.trim();
+
+            if (!text) return;
+
+            db.ref('chat/messages').push({
+                from: sender,
+                text,
+                timestamp: new Date().toISOString()
+            });
+
+            document.getElementById('chat-input').value = '';
+        }
+
+        db.ref('chat/messages').on('value', snap => {
+            const data = snap.val() || {};
+            const messagesDiv = document.getElementById('chat-messages');
+            messagesDiv.innerHTML = '';
+
+            Object.values(data).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)).forEach(msg => {
+                const msgEl = document.createElement('div');
+                msgEl.className = `chat-message ${msg.from === 'Mar' ? 'me' : 'other'}`;
+                const time = new Date(msg.timestamp).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+                msgEl.innerHTML = `
+                    <div>${msg.text}</div>
+                    <small>${msg.from} • ${time}</small>
+                `;
+                messagesDiv.appendChild(msgEl);
+            });
+
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        });
+
+        // ===== TAREAS =====
+        function addTask() {
+            const text = document.getElementById('task-input').value.trim();
+            if (!text) return;
+
+            db.ref('tasks').push({
+                text,
+                completed: false,
+                date: new Date().toISOString()
+            });
+
+            document.getElementById('task-input').value = '';
+        }
+
+        db.ref('tasks').on('value', snap => {
+            const data = snap.val() || {};
+            const tasksDiv = document.getElementById('tasks-list');
+            tasksDiv.innerHTML = '';
+
+            Object.entries(data).forEach(([key, task]) => {
+                const taskEl = document.createElement('div');
+                taskEl.className = `task-item ${task.completed ? 'completed' : ''}`;
+                taskEl.innerHTML = `
+                    <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask('${key}', this.checked)">
+                    <span>${task.text}</span>
+                    <span class="task-delete" onclick="deleteTask('${key}')">×</span>
+                `;
+                tasksDiv.appendChild(taskEl);
+            });
+        });
+
+        function toggleTask(key, completed) {
+            db.ref(`tasks/${key}/completed`).set(completed);
+        }
+
+        function deleteTask(key) {
+            db.ref(`tasks/${key}`).remove();
+        }
+
+        // ===== PELEAS =====
+        function addFight() {
+            db.ref('fights/today').transaction(current => (current || 0) + 1);
+        }
+
+        function resetFights() {
+            db.ref('fights/today').set(0);
+        }
+
+        db.ref('fights/today').on('value', snap => {
+            document.getElementById('fight-count').textContent = snap.val() || 0;
+        });
+
+        function checkDailyReset() {
+            const now = new Date();
+            now.setHours(0, 0, 0, 0);
+
+            db.ref('fights/lastReset').once('value').then(snap => {
+                const last = snap.val() ? new Date(snap.val()) : null;
+                if (!last || new Date(last) < now) {
+                    db.ref('fights/today').set(0);
+                    db.ref('fights/lastReset').set(now.toISOString());
+                }
+            });
+        }
+
+        setInterval(() => {
+            const now = new Date();
+            if (now.getHours() === 0 && now.getMinutes() === 0) {
+                checkDailyReset();
+            }
+        }, 60000);
+
+        // ===== CANCIONES =====
+        window.deezerCallback = function(data) {
+            const script = document.getElementById('deezer-jsonp');
+            if (script) script.remove();
+            if (!data || !data.data) {
+                document.getElementById('search-results').innerHTML = '';
+                return;
+            }
+            renderSearchResults(data.data);
+        };
+
+        function renderSearchResults(results) {
+            const resultsDiv = document.getElementById('search-results');
+            resultsDiv.innerHTML = '';
+            results.slice(0, 20).forEach(item => {
+                const artUrl = item.album?.cover_medium || '';
+                const title = item.title || 'Canción';
+                const artist = item.artist?.name || 'Artista';
+                const resultCard = document.createElement('div');
+                resultCard.className = 'movie-card';
+                resultCard.style.cursor = 'pointer';
+                resultCard.innerHTML = `
+                    <img src="${artUrl}" alt="${title}" style="width: 100%; height: 120px; object-fit: cover;">
+                    <div class="movie-info">
+                        <div class="movie-title" style="font-size: 11px;">${title}</div>
+                        <div class="movie-rating" style="font-size: 10px;">${artist}</div>
+                        <button onclick="chooseSong('${title.replace(/'/g, "\'")}', '${artist.replace(/'/g, "\'")}', '${artUrl.replace(/'/g, "\'")}', '${item.preview ? item.preview.replace(/'/g, "\'") : ''}')" style="width: 100%; padding: 0.3rem; margin: 0.5rem 0 0 0; font-size: 9px;">Elegir</button>
+                    </div>
+                `;
+                resultsDiv.appendChild(resultCard);
+            });
+        }
+
+        function searchSongs() {
+            const query = document.getElementById('song-query').value.trim();
+            const existing = document.getElementById('deezer-jsonp');
+            if (existing) existing.remove();
+
+            if (!query) {
+                const script = document.createElement('script');
+                script.id = 'deezer-jsonp';
+                script.src = 'https://api.deezer.com/chart/0/tracks?output=jsonp&limit=20&callback=deezerCallback';
+                document.body.appendChild(script);
+                return;
+            }
+
+            const encoded = encodeURIComponent(query);
+            const script = document.createElement('script');
+            script.id = 'deezer-jsonp';
+            script.src = `https://api.deezer.com/search?q=${encoded}&output=jsonp&limit=20&callback=deezerCallback`;
+            document.body.appendChild(script);
+        }
+
+        function chooseSong(title, artist, artwork, preview) {
+            selectedSong = { title, artist, artwork, preview };
+            document.getElementById('song-title').value = title;
+            document.getElementById('song-artist').value = artist;
+        }
+
+        function saveSong() {
+            const title = document.getElementById('song-title').value.trim();
+            const artist = document.getElementById('song-artist').value.trim();
+            const who = document.getElementById('song-who').value;
+            const date = document.getElementById('song-date').value;
+            const note = document.getElementById('song-note').value.trim();
+
+            if (!title || !artist) {
+                alert('⚠️ Selecciona una canción primero');
+                return;
+            }
+
+            db.ref('songs').push({
+                title,
+                artist,
+                artwork: selectedSong.artwork,
+                who,
+                date: date || new Date().toISOString().slice(0, 10),
+                note,
+                timestamp: new Date().toISOString()
+            });
+
+            document.getElementById('song-title').value = '';
+            document.getElementById('song-artist').value = '';
+            document.getElementById('song-note').value = '';
+            selectedSong = { title: '', artist: '', artwork: '', preview: '' };
+        }
+
+        db.ref('songs').on('value', snap => {
+            const data = snap.val() || {};
+            const songsDiv = document.getElementById('saved-songs');
+            songsDiv.innerHTML = '';
+
+            Object.entries(data).sort((a, b) => new Date(b[1].timestamp) - new Date(a[1].timestamp)).forEach(([key, song]) => {
+                const songCard = document.createElement('div');
+                songCard.style.cssText = 'display: flex; gap: 1rem; padding: 1rem; background-color: #1c1c35; border-radius: 12px; border: 0.5px solid rgba(201, 169, 110, 0.18);';
+                songCard.innerHTML = `
+                    <img src="${song.artwork}" alt="${song.title}" style="width: 60px; height: 60px; border-radius: 8px; object-fit: cover;">
+                    <div style="flex: 1;">
+                        <div style="color: #c9a96e; font-weight: 500; margin-bottom: 0.25rem;">${song.title}</div>
+                        <div style="color: #8b7355; font-size: 12px;">${song.artist}</div>
+                        <div style="color: #d4c88f; font-size: 11px; margin-top: 0.25rem;">${song.who === 'Mar' ? '🌍' : '🌎'} ${song.who} • ${song.date}</div>
+                        <div style="color: #b0a176; font-size: 12px; margin-top: 0.5rem; font-style: italic;">"${song.note}"</div>
+                    </div>
+                `;
+                songsDiv.appendChild(songCard);
+            });
+        });
+
+        // ===== INICIALIZACIÓN =====
+        window.addEventListener('load', () => {
+            resizeBgCanvas();
+            animateBg();
+            updateTimes();
+            checkDailyReset();
+            searchSongs();
+
+            setInterval(updateTimes, 1000);
+
+            document.getElementById('song-query').addEventListener('input', () => {
+                clearTimeout(window.songSearchTimeout);
+                window.songSearchTimeout = setTimeout(searchSongs, 400);
+            });
+
+            document.getElementById('chat-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+
+            document.getElementById('task-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') addTask();
+            });
+
+            document.getElementById('song-date').value = new Date().toISOString().slice(0, 10);
+        });
+
+        window.addEventListener('resize', resizeBgCanvas);
     </script>
 </body>
 </html>
