@@ -13,6 +13,8 @@
         #background-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
         nav { position: sticky; top: 0; background-color: rgba(7, 7, 26, 0.88); backdrop-filter: blur(16px); padding: 1rem 2rem; border-bottom: 0.5px solid rgba(201, 169, 110, 0.18); z-index: 10; display: flex; justify-content: space-between; align-items: center; }
         nav .logo { font-family: "Cormorant Garamond", serif; font-size: 24px; color: #c9a96e; }
+        nav .web-link { font-size: 12px; color: #b0a176; text-decoration: none; margin-left: 1rem; }
+        nav .web-link:hover { color: #c9a96e; }
         nav .nav-links { display: flex; gap: 2rem; flex-wrap: wrap; }
         nav a { color: #b0a176; text-decoration: none; transition: color 300ms; font-size: 14px; }
         nav a:hover { color: #c9a96e; }
@@ -64,7 +66,10 @@
 <body>
     <canvas id="background-canvas"></canvas>
     <nav>
-        <div class="logo">Mar & Franco</div>
+        <div style="display: flex; align-items: center;">
+            <div class="logo">Mar & Franco</div>
+            <a href="https://maarr1502-jpg.github.io/RealUS/" class="web-link" target="_blank">🌐 Web</a>
+        </div>
         <div class="nav-links">
             <a href="#skies">Cielos</a>
             <a href="#miss">Te echo de menos</a>
